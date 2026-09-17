@@ -1,6 +1,32 @@
 # Marmalade — Rive Rig Specification v1
 
-Status: **character approved; Phase 2 neutral draft failed visual acceptance.** The specification below remains a plan, not a description of a completed rig.
+Status: **four-state native foundation implemented; visual acceptance pending.** This implementation section supersedes the historical draft and planned 1024-unit design below.
+
+## Current foundation contract — 2026-09-18
+
+Editable source: `tools/build-character.mjs` → `rive-foundation/scene.rml`. Runtime export: `assets/character/production/marmalade-foundation.riv` (69,945 bytes), official Rive CLI 1.0.4. Artboard and machine: `Marmalade_Main`, 300 × 370 units. No embedded raster fragments. RML is the native editable source; a cloud `.rev` archive was not generated.
+
+| Input | Type | Range / meaning |
+|---|---|---|
+| state | Number | 0 Idle, 1 Peeking, 2 Looking, 3 Walking |
+| scrollProgress | Number | 0 hidden → 100 peek hold; reversible |
+| lookX / lookY | Number | 0…100, 50 centered; lab displays −1…1 |
+| moveSpeed | Number | 0 Walk → 100 Trot blend, not global playback speed |
+| expression | Number | 0 Gentle, 1 Focused, 2 Mischievous |
+| blinkEnabled | Bool | enables cyclic blink; false blends to open eyes |
+| hasHat | Bool | hat visibility |
+
+Layers: `Body_Action`, `Breathing`, `Ear_Reaction`, `Tail_Behavior`, `Face_Reaction`, `Gaze_X`, `Gaze_Y`, `Accessories`, `Expression`. Existing planned body/face/ear/tail/accessory responsibilities are retained; breathing/gaze/expression are independent channels. `Prop_Interaction` is reserved, not implemented.
+
+Body state identifiers: `Idle`, `Peeking`, `Looking`, `Walking`. Peeking blends `PeekHidden`/`PeekHold`; Walking blends `Walk`/`Trot`. All body-to-body transitions interpolate the same geometry over 550 ms with cubic easing, not duplicate drawing opacity. Looking has an automatic head/gaze scan; manual gaze adds inside clipped eye shapes. Blink is a 200 ms close/open within a 4 s loop. Walk is 64 frames, trot 40 frames at 60 fps. Breathing: 4.8 s; ears: 6 s; tail: 4 s.
+
+Actual pivots: head (163,147), torso (162,245), front shoulders (140,243)/(186,243), forearm offset (0,32), paw offset (0,48), rear hips (133,272)/(193,272), tail base (100,278). Tail: five nested curved, rounded, overlapping segments with phase-offset rotation. This is a transform-based vector rig, not a skinned bone mesh. Front limbs overlap without stroked joint boundaries. Markings move with their owning components. Hat anchor is a named head-child transform; no physics constraint.
+
+50 component-group SVGs plus standalone head base, torso, eye whites, irises, pupils and catchlights. Individual files use parent-local coordinates on a generous canvas; `parts.json` and assembled SVG preserve registration. Import the assembled SVG to preserve stacking/transforms rather than aligning isolated previews by their canvas centers. Expressions also have static SVG previews; runtime expressions add small lid rotations beyond those previews. Debug guides are neutral reference pivots, not live bone instrumentation.
+
+See `production-redraw.md` for remaining art differences and acceptance limits.
+
+## Historical draft and future planning (not current implementation)
 
 ## Phase 2 implementation evidence
 

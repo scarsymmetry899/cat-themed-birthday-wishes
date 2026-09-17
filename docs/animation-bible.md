@@ -1,6 +1,6 @@
 # Marmalade — Animation Bible v1
 
-Status: **16-state production plan; animation waits for character and rig approval**.
+Status: **only the four-state foundation is implemented**: Idle, Peeking, Looking, Walking (walk/trot blend), plus additive channels and Gentle/Focused/Mischievous expressions. Current timings and input ranges are in `rig-spec.md`. The table below remains the broader 16-state plan; the other twelve actions are NOT implemented.
 
 All durations assume 60 fps design timing. Scroll-scrubbed actions use normalized progress `0…1` and must reverse cleanly. Additive blink, ears, gaze, breathing and tail layers continue unless a state explicitly overrides them.
 

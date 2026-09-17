@@ -1,0 +1,12 @@
+{
+  "name": "marmalade-character-lab",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lab": "node tools/serve-lab.mjs",
+    "character:source": "node tools/build-character.mjs",
+    "vendor": "node tools/vendor-runtime.mjs"
+  },
+  "dependencies": { "@rive-app/canvas": "2.42.2" }
+}
