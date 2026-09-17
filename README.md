@@ -4,7 +4,19 @@ An immersive birthday experience led by one consistent orange tabby kitten. The 
 
 ## Current status
 
-**Phase 1 — character foundation ready for approval.** The master sheet, palette, fixed marking map, proportion guide, rig split and 16-state animation plan are complete. Final rigging and the Next.js/Rive rebuild intentionally have not started until the character identity is approved.
+**Marmalade V1 is approved and frozen. Phase 2 is incomplete at the neutral assembly gate.** A separated vector draft and genuine Rive neutral export now exist. Visual comparison rejected the draft: it does not yet match the approved face, muzzle, limbs or painted finish. The four states have not been built. This is not an approval-ready foundation prototype.
+
+### Phase 2 working artifacts
+
+- `tools/build-character.mjs`: editable vector source generator; creates SVG components and native RML.
+- `assets/character/production/`: 35 component-group SVG exports, assembled SVG, component JSON and neutral `.riv` draft. Folder naming does not imply production acceptance.
+- `rive-foundation/scene.rml`: editable native Rive source, built with official Rive CLI 1.0.4; no scripts or raster images embedded.
+- `character-lab/`: neutral assembly comparison only; animation controls intentionally unavailable.
+- `docs/qa/phase-2/`: desktop, phone and tablet assembly evidence.
+
+Run `node tools/serve-lab.mjs`, then open `http://127.0.0.1:8137/character-lab/`. Recreate the draft using `node tools/build-character.mjs`, then `rive rive-foundation --verify`, `rive inspect rive-foundation --summary`, and `rive rive-foundation --once`. The official CLI is available from https://rive.app/docs/cli/getting-started.
+
+Current exported artboard and machine: `Marmalade_Main`. Layer: `Body_Action`. Timeline: `Neutral`. **No runtime inputs or four-state animations exist yet.** The original state-machine contract remains planned, not implemented.
 
 The repository also contains a legacy static V3 prototype (`index.html`, `styles.css`, `app.js`). It remains deployable for reference, but its hand-built SVG cat is not the approved final production asset.
 

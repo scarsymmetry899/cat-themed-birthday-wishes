@@ -1,6 +1,16 @@
 # Marmalade — Rive Rig Specification v1
 
-Status: **rig-feasibility plan; implementation waits for character approval**.
+Status: **character approved; Phase 2 neutral draft failed visual acceptance.** The specification below remains a plan, not a description of a completed rig.
+
+## Phase 2 implementation evidence
+
+`tools/build-character.mjs` emits actual separated SVG geometry and native RML at `rive-foundation/scene.rml`. Official Rive CLI 1.0.4 verified the file and inspected it with no reported problems. The neutral runtime export is `assets/character/production/marmalade-neutral-draft.riv` (57,367 bytes).
+
+Actual implementation: 300 × 370 artboard `Marmalade_Main`, machine `Marmalade_Main`, one `Body_Action` layer, one `Neutral` timeline, no inputs. There are 35 exported component groups, including paired ears, inner ears, eyes, eyelids, pupils/catchlights, whiskers, articulated front/rear limb groups, torso, chest, belly, muzzle, nose, mouth and hat. Named shapes inside the assembled SVG supply head base and eye whites. Group SVGs use their parent-local coordinate space; `parts.json` preserves their assembly hierarchy. The tail is still a single contour, not the requested segmented deforming rig; the hat attachment is a transform, not a finished constraint.
+
+The first render had eyelids obscuring the forehead M; clipping was corrected. The second render remains visually unacceptable: muzzle, cheeks, eye aspect, limb shapes, cream areas and texture differ from the master. These are defects, not approved or unavoidable deviations. No animation has been started because the user requires the assembled neutral to match first.
+
+A pre-existing reference conflict was found: the master shows a cream tail tip, while the written bible says dark tip. The draft follows the visible master for that detail. Neither approved reference file has been modified. This discrepancy needs resolution during faithful asset preparation; it does not authorize a redesign.
 
 ## Artboard and coordinate system
 
