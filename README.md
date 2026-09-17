@@ -1,85 +1,60 @@
-# Paws, Purrs & Birthday Wishes — V3
+# Marmalade's Birthday — Interactive Scroll Film
 
-A scroll-choreographed, Framer-style birthday story built around **one continuous orange-tabby protagonist**.
+An immersive birthday experience led by one consistent orange tabby kitten. The creative goal is a tiny animated film controlled by scrolling: warm, playful, cinematic and personal, with Marmalade physically carrying the visitor from one beat to the next.
 
-## What changed in V3
+## Current status
 
-The previous card-by-card raster implementation was replaced rather than patched.
+**Phase 1 — character foundation ready for approval.** The master sheet, palette, fixed marking map, proportion guide, rig split and 16-state animation plan are complete. Final rigging and the Next.js/Rive rebuild intentionally have not started until the character identity is approved.
 
-- **No blurry cat PNGs.** The protagonist is now a crisp inline SVG character that stays sharp at every screen size.
-- **One continuous actor.** The same cat follows the visitor through the entire page instead of being repeated as separate static images.
-- **Scroll choreography.** A requestAnimationFrame interpolation layer maps scroll position to cat position, rotation, scale and scene progress.
-- **Pose transitions.** Head, body, paws, tail, eyes and party hat are independently articulated for peeking, yarn play, chasing, tearing, hanging, sleeping and celebrating.
-- **Pinned cinematic chapters.** Each story beat uses a sticky viewport with long scroll travel, giving the page a continuous motion-design feel rather than a stack of greeting cards.
-- **Responsive choreography.** Desktop and mobile use different cat travel coordinates and scene composition.
+The repository also contains a legacy static V3 prototype (`index.html`, `styles.css`, `app.js`). It remains deployable for reference, but its hand-built SVG cat is not the approved final production asset.
 
-## Story flow
+## Foundation artifacts
 
-1. **Arrival** — the tabby peeks into the page and invites the visitor to follow.
-2. **Yarn** — a purple yarn path physically draws itself as the visitor scrolls while the ball rolls across the scene.
-3. **Chase** — a toy ball rolls and bounces while the cat changes into a chase pose.
-4. **Tear reveal** — patterned paper splits apart with scroll progress to expose “You are deeply loved.”
-5. **Hang** — the cat transitions into a hanging pose beneath a rope while a suspended birthday note drops into view.
-6. **Nap** — the body settles, eyes close and the character breathes gently in a calmer chapter.
-7. **Party** — the party hat appears, balloons enter and confetti can be released interactively.
-8. **Finale** — local-only photo personalization, cake, candles, confetti and an optional Happy Birthday Web Audio melody.
+- [Character bible](docs/character-bible.md)
+- [Rig specification](docs/rig-spec.md)
+- [Animation bible](docs/animation-bible.md)
+- [Continuous-film storyboard](docs/storyboard.md)
+- [QA log](docs/qa-log.md)
+- [Marmalade master sheet v1](assets/character/marmalade-master-sheet-v1.png)
 
-## Architecture
+## Planned production architecture
 
-```text
-cat-themed-birthday-wishes/
-├── index.html     # semantic story markup + inline vector cat
-├── styles.css     # motion design, pose system, responsive layouts
-├── app.js         # scroll choreography + interactions + audio
-├── vercel.json
-└── README.md
+- Next.js + TypeScript
+- Rive Web runtime with `Marmalade_Main`
+- GSAP + ScrollTrigger for reversible scene choreography
+- Lenis synchronized to the GSAP ticker
+- Canvas only for confetti/particles
+- CSS design tokens and responsive art direction
+- Vercel deployment through the connected GitHub repository
+
+## Animation states
+
+Idle, Peeking, Looking around, Walking, Yarn play, Pounce, Scratching, Paper pull/tear, Hanging, Swinging, Curling down, Sleeping, Waking, Excited, Celebration, and Hat drop/final hero.
+
+## Intended delivery sequence
+
+1. Approve Marmalade's v1 visual identity.
+2. Redraw approved art into the separated Rive layer structure.
+3. Build and verify Idle, Peeking, Looking around and Walking.
+4. Prove the first three scroll scenes and reverse-safe transitions.
+5. Add the remaining states and chapters.
+6. Personalize name/photo, add optional audio, complete the viewport/accessibility matrix.
+7. Deploy the verified production build to Vercel.
+
+## Running the existing reference prototype
+
+The current reference is dependency-free. Serve the repository directory with any static server, for example:
+
+```powershell
+python -m http.server 8000
 ```
 
-The old Base64 cat assets may remain in `assets/` for reference, but **V3 does not use them**.
+Then open `http://localhost:8000`.
 
-## Responsive design
+## Deployment
 
-### Desktop
-- long pinned chapters
-- wide editorial composition
-- chapter rail navigation
-- scroll-linked character travel on the right/left of the story as needed
+Repository: `https://github.com/scarsymmetry899/cat-themed-birthday-wishes`
 
-### Mobile
-- dedicated actor coordinates rather than simply scaling desktop
-- shortened scroll lengths
-- centered storytelling copy
-- re-positioned hanging note, balloons, finale card and cat path
-- large touch targets
+Legacy V3 alias: `https://cat-themed-birthday-wishes-abhitejachn-8733s-projects.vercel.app`
 
-## Interaction details
-
-- scroll progress bar
-- chapter navigation rail on desktop
-- scroll-drawn yarn
-- rolling/bouncing ball
-- physical two-panel tear reveal
-- suspended note reveal
-- sleeping-eye state and breathing motion
-- balloon entrances
-- generated confetti
-- browser-local photo picker
-- user-triggered Happy Birthday melody
-- replay control
-- `prefers-reduced-motion` fallback
-
-## Privacy
-
-Photos chosen in the finale are read with `FileReader` and remain in the visitor's browser. Nothing is uploaded to a server.
-
-## Production
-
-Canonical repository:
-
-`https://github.com/scarsymmetry899/cat-themed-birthday-wishes`
-
-Stable Vercel alias:
-
-`https://cat-themed-birthday-wishes-abhitejachn-8733s-projects.vercel.app`
-
-The V3 production deployment was created on 17 September 2026.
+The legacy deployment remains unchanged in this foundation phase. The production alias will be updated only after character approval, implementation and full browser QA.
