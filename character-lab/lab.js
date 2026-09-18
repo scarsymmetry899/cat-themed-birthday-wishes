@@ -5,7 +5,7 @@ let rc,file,board,machine,renderer,inputs={},nodes={},state=0,paused=false,token
 const target={lookX:50,lookY:50,moveSpeed:0},trails={},previous={},contactReadout={};
 const pawNames=['left_paw','right_paw','left_rear_paw','right_rear_paw'];
 $('#walk-test').insertAdjacentHTML('afterend','<button id="gait-test">Walk ↔ trot</button>');
-stage.insertAdjacentHTML('beforeend',`<svg class="reference-layer" viewBox="0 0 300 370" aria-hidden="true"><image href="../assets/character/marmalade-master-sheet-v1.png" width="1536" height="1024"/></svg><svg class="landmark-layer" viewBox="0 0 300 370" aria-hidden="true"><path d="M100 146H223 M130 167H198 M116 204H210 M106 218H220 M96 278H111 M100 337H223 M106 209V233 M220 209V233"/><text x="224" y="146">eyes</text><text x="201" y="166">nose</text><text x="214" y="204">chin</text><text x="223" y="219">shoulders</text><text x="49" y="278">tail root</text><text x="224" y="337">paws</text></svg><svg class="contact-layer" viewBox="0 0 300 370" aria-hidden="true"></svg>`);
+stage.insertAdjacentHTML('beforeend',`<svg class="reference-layer" viewBox="0 0 300 370" aria-hidden="true"><image href="/assets/character/marmalade-master-sheet-v1.png" width="1536" height="1024"/></svg><svg class="landmark-layer" viewBox="0 0 300 370" aria-hidden="true"><path d="M100 146H223 M130 167H198 M116 204H210 M106 218H220 M96 278H111 M100 337H223 M106 209V233 M220 209V233"/><text x="224" y="146">eyes</text><text x="201" y="166">nose</text><text x="214" y="204">chin</text><text x="223" y="219">shoulders</text><text x="49" y="278">tail root</text><text x="224" y="337">paws</text></svg><svg class="contact-layer" viewBox="0 0 300 370" aria-hidden="true"></svg>`);
 if(location.hostname==='127.0.0.1')$('.fidelity').insertAdjacentHTML('beforeend','<button id="record-motion">Record 8 s motion evidence at 1×</button><p id="record-status" class="note"></p><video id="motion-replay" controls loop playsinline style="max-width:320px;display:none"></video>');
 function set(n,v){if(inputs[n])inputs[n].value=v;}
 function action(n){if(n!==state){walkTime=0;for(const p of pawNames){trails[p]=[];delete previous[p];}}state=n;set('state',n);$('#state-label').textContent=names[n];stage.classList.toggle('peeking',n===1);document.querySelectorAll('[data-state]').forEach(b=>b.classList.toggle('selected',+b.dataset.state===n));}
@@ -54,8 +54,8 @@ function frame(now){
  request=rc.requestAnimationFrame(frame);
 }
 async function start(){
- rive.RuntimeLoader.setWasmUrl(new URL('vendor/rive.wasm',location.href).href);rive.RuntimeLoader.setWasmFallbackUrl(null);rc=await rive.RuntimeLoader.awaitInstance();
- const response=await fetch('../assets/character/production/marmalade-foundation.riv',{cache:'no-store'});if(!response.ok)throw Error('Rive asset HTTP '+response.status);
+ rive.RuntimeLoader.setWasmUrl('/character-lab/vendor/rive.wasm');rive.RuntimeLoader.setWasmFallbackUrl(null);rc=await rive.RuntimeLoader.awaitInstance();
+ const response=await fetch('/assets/character/production/marmalade-foundation.riv',{cache:'no-store'});if(!response.ok)throw Error('Rive asset HTTP '+response.status);
  file=await rc.load(new Uint8Array(await response.arrayBuffer()));board=file.defaultArtboard();renderer=rc.makeRenderer(canvas);resetMachine();
  for(const name of [...pawNames,'head_group','body_group','left_upper_front','right_upper_front','left_lower_front','right_lower_front','tail_base'])nodes[name]=board.node(name);
  loaded=true;resize();sync();$('#status').textContent='Native Rive ready';setPause(matchMedia('(prefers-reduced-motion: reduce)').matches);request=rc.requestAnimationFrame(frame);
