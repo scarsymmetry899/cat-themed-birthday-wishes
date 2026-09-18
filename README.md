@@ -4,6 +4,8 @@ An immersive birthday experience led by one consistent orange tabby kitten. The 
 
 ## Current status
 
+**Refinement checkpoint:** baseline `a5b8f35` was pushed intact, then the same four-state foundation was refined on `codex/marmalade-phase2-foundation`. The lab now includes master overlay, landmarks, marking/silhouette isolation, native time control and live paw diagnostics. Walk/trot is reauthored at 0.95/0.60 seconds. See [detailed fidelity audit](docs/fidelity-review.md). **Production likeness and final gait acceptance remain open; do not expand to other animations.** Real-time motion captures are in `docs/qa/phase-2-refinement/`. Physical mobile performance remains UNVERIFIED.
+
 **Marmalade V1 remains frozen. The four-state native Rive lab is implemented; final visual/production acceptance is NOT claimed.** The riggable redraw, two expressions, separated vectors, native source/export and responsive test page are available for review. The redraw still looks flatter and more geometric than the painted direction. See [production notes](docs/production-redraw.md) and [QA](docs/qa-log.md) before approving it. No birthday scenes or other twelve body actions were built.
 
 ### Phase 2 working artifacts

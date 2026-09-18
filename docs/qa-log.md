@@ -1,5 +1,40 @@
 # QA Log
 
+## Foundation refinement — 2026-09-18
+
+Baseline `a5b8f35e1a3cdd55b3579ca01db12fdcd6f719dd` pushed intact to the canonical repository's `codex/marmalade-phase2-foundation` branch before refinement. No production branch, approved master, bible or birthday-site files changed. **Still NOT approved for expansion.** Detailed feature-by-feature audit is in `fidelity-review.md`.
+
+### Actual verification
+
+- Native Rive CLI 1.0.4 verify: 0 errors, 0 warnings. Inspect: no problems. Final export 158,523 bytes, 4 body states, 37 supporting timelines, 12 layers.
+- `node tools/test-foundation.mjs`: authored walk/trot target geometry, exact stance origins, closed cycle endpoints and diagonal trot pairing PASS. Walk 0.95 s, trot 0.60 s. Zero authored stance-target drift. This test does not certify intermediate native blends or aesthetic gait quality.
+- Browser loaded the native export through the official low-level canvas runtime; no runtime errors were returned in the inspected log window.
+- Reviewed actual live state changes, then captured eight-second 1× canvas videos and 10 Hz live paw readouts: `walk.webm`, `trot.webm`, `state-0.webm` (idle/walk/idle), `state-1.webm` (peek/look), `gait-blend.webm`, `peek-reverse.webm`, with corresponding metrics. These are real runtime captures, not image sequences assembled into fake motion. Canvas clips omit the HTML foreground ledge/guides; screenshots separately verify their compositing. The reverse clip is shorter than the full reverse-and-return test.
+- Readouts show stationary support paws at their floor positions in both gait endpoints, with opposite diagonal swing pairs in trot. Runtime toe compression can move toe surfaces slightly while the paw origin stays planted. No claim of phase-locked foot constraints across every intermediate speed blend.
+- Found and fixed incomplete upper-lid coverage during deterministic blink inspection. Both eyes now close; a slight closed-lid color boundary remains a visual issue.
+
+### Browser matrix (in-app Chromium)
+
+| CSS viewport | Result | DPR qualification |
+|---|---|---|
+| 1440 × 900 | Native rig, reference overlay, state/transition and debug controls exercised; screenshots saved | Actual DPR approximately 1 |
+| 1920 × 1080 | Layout inspected; no horizontal overflow | Actual DPR approximately 1 |
+| 834 × 1194 | Tablet two-column layout inspected; no horizontal overflow | Actual DPR approximately 1 |
+| 390 × 844 | Stacked layout, character visible, controls scroll normally; no horizontal overflow | Actual DPR approximately 1 |
+| 390 × 844, 2× backing | 570 × 703 canvas backing confirmed; character inspected | Artificial backing-resolution test, NOT device-DPR emulation |
+| Physical mid-range phone | UNVERIFIED | No physical phone available |
+| Genuine Retina/high-DPR device | UNVERIFIED | Viewport API does not expose deviceScaleFactor; default host was approximately 1.35 earlier, not a Retina acceptance test |
+
+### Evidence and disposition
+
+`docs/qa/phase-2-refinement/` holds neutral overlay, idle, blink midpoint, gaze samples, peek 25/50/75/100, walk/trot contact stills, viewport shots, silhouette/marking tests and videos. UI readout is requested state plus actual native input values, not a claim that a transition has finished. Some early screenshots preceded the last foreleg-band refinement; final walk/trot recordings and final review stills show the last export.
+
+All body transitions still use one continuous vector rig and 650 ms cubic blends. Idle→peek, peek→look, look→idle and idle↔walk are exercised through buttons/sequences; walk↔trot input is now smoothed over a 280 ms response. Silhouette, head/tail/ear continuity and contact behavior have been sampled, not exhaustively certified at every interrupted transition phase. The eye-first response uses 130 ms gaze smoothing, then slower head and ear response; pointer center dead zone is 12%.
+
+**Open gates:** exact likeness/painted warmth, final gait performance (still frontal/in-place), all-speed blend contact polish, closed-lid color integration, side/back dorsal-marking validation, physical mobile performance and genuine high-DPR verification. A dedicated reversible ear flick was added at 92% peek after the earlier captures. No acceptance is inferred from compile success or fixed-target tests.
+
+**Preview deployment:** Vercel connector lists a different accessible project, and lookup of `cat-themed-birthday-wishes` returns 404. An untargeted deployment request was blocked by auto-review because the destination/payload were not sufficiently verified. No deployment or production promotion was performed; correct project access/ID is needed for a preview-only deployment.
+
 ## Phase 2 — four-state review candidate, 2026-09-18
 
 The native four-state lab now exists. **Not all acceptance gates pass; do not label this production-complete.** The user allowed a clean riggable redraw after the rejected first attempt. The new assembly improves muzzle/chest boundaries, eye shape and joint overlaps, but its flatter geometric finish and frontal gait still require art/motion refinement. V1 and the birthday website are unchanged.

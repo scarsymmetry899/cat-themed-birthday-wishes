@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {refine} from './refine-character.mjs';
 // Source geometry is authored in master-sheet front-view coordinates.
 // All production exports are vectors. No bitmap is embedded in the character.
 const out = 'assets/character/production';
@@ -86,10 +87,11 @@ for(const [i,dx,dy,w] of [[0,-28,-5,24],[1,-17,-23,25],[2,-2,-28,25],[3,-2,-25,2
 }
 tailParent.children.push(e('tail_soft_tip',0,0,10.8,9,C.cream));
 head.children.push(g('hat_anchor',0,-77,[]));
+refine({root,find,p,g,e,C});
 // Fine vector strokes preserve the master's brushed surface without raster fragments.
 let seed=1709;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 function texture(name,base,cx,cy,rx,ry,count){const paths=['',''];for(let i=0;i<count;i++){const a=rand()*Math.PI*2,r=Math.sqrt(rand()),x=cx+Math.cos(a)*rx*r,y=cy+Math.sin(a)*ry*r,len=2+rand()*5;const flow=(x-cx)/rx*1.5;paths[i%3?0:1]+=`M ${x} ${y} C ${x+flow} ${y+len*.3} ${x+flow*.7} ${y+len*.6} ${x+flow} ${y+len} `;}const lines=paths.map((d,i)=>({...p(`${name}_${i}`,d,null,i?'#A94E2B':'#F7C17D',.4),opacity:.25}));return {...group(name,0,0,lines),clipRef:base};}
-head.children.splice(3,0,texture('head_fur','head_base',0,-8,90,74,450));
+find(root,'head_response').children.splice(3,0,texture('head_fur','head_base',0,-8,90,74,1200));
 torso.children.splice(1,0,texture('body_fur','torso',0,16,52,76,220));
 for(const leg of legs)leg.children.splice(1,0,texture(`${leg.name}_fur`,`${leg.name.replace('_upper_front','')}_upper_shape`,0,6,20,30,65));
 function attrs(o){return Object.entries(o).map(([k,v])=>`${k}="${v}"`).join(' ')}
@@ -108,6 +110,7 @@ for(const [name,left,right] of [['focused',20,20],['mischievous',28,14]]){
  fs.writeFileSync(`${out}/marmalade-${name}.svg`,svgdoc(svg(root)));
 }
 find(root,'left_expression_lid').y=0;find(root,'right_expression_lid').y=0;
+for(const filename of fs.readdirSync(out).filter(n=>n.endsWith('.svg'))){let source=fs.readFileSync(`${out}/${filename}`,'utf8');for(const [name,cx,cy,r,inner,outer] of [['head_base',-15,-25,105,'#F4B45D','#D78032'],['cream_muzzle',-10,1,62,'#FFF0D4','#E4C395']]){source=source.replace(new RegExp(`<path id="${name}"[^>]+>`,'g'),tag=>tag.replace(/fill="[^"]+"/,`fill="url(#volume_${name})"`));source=source.replace('</defs>',`<radialGradient id="volume_${name}" gradientUnits="userSpaceOnUse" cx="${cx}" cy="${cy}" r="${r}"><stop stop-color="${inner}"/><stop offset="1" stop-color="${outer}"/></radialGradient></defs>`);}fs.writeFileSync(`${out}/${filename}`,source);}
 // Expand SVG cubic/quadratic geometry into native Rive cubic vertices.
 function paths(d){const t=d.match(/[A-Za-z]|[-+]?(?:\d*\.)?\d+(?:e[-+]?\d+)?/g);let i=0,cmd,cur=[0,0],contours=[],v=[],closed=false;const num=()=>+t[i++];const finish=()=>{if(v.length){contours.push({v,closed});v=[];closed=false;}};
  while(i<t.length){if(/[A-Za-z]/.test(t[i]))cmd=t[i++];if(cmd==='M'){finish();cur=[num(),num()];v.push({p:cur});cmd='L';}else if(cmd==='L'){cur=[num(),num()];v.push({p:cur});}else if(cmd==='C'){const a=[num(),num()],b=[num(),num()],end=[num(),num()];v.at(-1).out=a;v.push({p:end,in:b});cur=end;}else if(cmd==='Z'){closed=true;finish();cmd=null;}else throw Error('Unsupported path '+cmd);}finish();return contours;}
@@ -115,39 +118,73 @@ const color=h=>'FF'+h.slice(1).toUpperCase();
 function geom(d){return paths(d).map(({v,closed})=>`<PointsPath isClosed="${closed}">${v.map(a=>{if(!a.in&&!a.out)return `<StraightVertex x="${a.p[0]}" y="${a.p[1]}"/>`;const handle=b=>b?[Math.atan2(b[1]-a.p[1],b[0]-a.p[0]),Math.hypot(b[0]-a.p[0],b[1]-a.p[1])]:[0,0];const [ir,il]=handle(a.in),[or,ol]=handle(a.out);return `<CubicDetachedVertex x="${a.p[0]}" y="${a.p[1]}" inRotation="${ir}" inDistance="${il}" outRotation="${or}" outDistance="${ol}"/>`;}).join('')}</PointsPath>`).join('');}
 function paint(fill){if(fill===C.fur)return `<LinearGradient startX="-40" startY="-60" endX="40" endY="75"><GradientStop position="0" colorValue="FFF1AC58"/><GradientStop position="0.48" colorValue="FFE8893A"/><GradientStop position="1" colorValue="FFCC6B2C"/></LinearGradient>`;if(fill===C.cream)return `<LinearGradient startX="0" startY="-15" endX="0" endY="40"><GradientStop position="0" colorValue="FFFFEDD1"/><GradientStop position="1" colorValue="FFF0D4A6"/></LinearGradient>`;return `<SolidColor colorValue="${color(fill)}"/>`;}
 function rml(n,clips=[]){const uid=id(n.name);if(n.kind==='group'){let mask='';if(n.clip){const mid=id(n.name+'_mask');mask=`<Shape id="${mid}" name="${n.name}_mask">${geom(n.clip)}</Shape>`;clips=[...clips,mid];}if(n.clipRef)clips=[...clips,id(n.clipRef)];return `<Node id="${uid}" name="${n.name}" x="${n.x}" y="${n.y}" opacity="${n.opacity??1}">${[...n.children].reverse().map(c=>rml(c,clips)).join('')}${mask}</Node>`;}return `<Shape id="${uid}" name="${n.name}" opacity="${n.opacity??1}" ${n.kind==='ellipse'?`x="${n.x}" y="${n.y}"`:''}>${n.kind==='ellipse'?`<Ellipse width="${n.rx*2}" height="${n.ry*2}" originX="0.5" originY="0.5"/>`:geom(n.d)}${n.fill?`<Fill>${paint(n.fill)}</Fill>`:''}${n.stroke?`<Stroke thickness="${n.width}" cap="round"><SolidColor colorValue="${color(n.stroke)}"/></Stroke>`:''}${clips.map(c=>`<ClippingShape sourceId="${c}"/>`).join('')}</Shape>`;}
-const artwork=rml(root);
+// Radial volume paint on non-deforming face regions. Preserve identical SVG/RML colors.
+function volumeRml(text){for(const [name,cx,cy,radius,inner,outer] of [['head_base',-15,-25,105,'FFF4B45D','FFD78032'],['cream_muzzle',-10,1,62,'FFFFF0D4','FFE4C395']]){const start=text.indexOf(`<Shape id="${id(name)}"`),end=text.indexOf('</Shape>',start);const shape=text.slice(start,end);const painted=shape.replace(/<Fill>[\s\S]*?<\/Fill>/,`<Fill><RadialGradient startX="${cx}" startY="${cy}" endX="${cx+radius}" endY="${cy}"><GradientStop position="0" colorValue="${inner}"/><GradientStop position="1" colorValue="${outer}"/></RadialGradient></Fill>`);text=text.slice(0,start)+painted+text.slice(end);}return text;}
+const artwork=volumeRml(rml(root));
+const markingNames=[];function collectMarkings(n){if(/forehead_M|cheek_.*_(upper|lower)|body_.*_band|_(upper_band|lower_band|thigh_stripe|foreleg_top_band)$|tail_ring_/.test(n.name)&&n.name!=='tail_ring_4'&&n.opacity!==0)markingNames.push(n.name);for(const c of n.children??[])collectMarkings(c);}collectMarkings(root);
 const key=(name,prop,frames)=>`<KeyedObject objectId="${id(name)}"><KeyedProperty propertyKey="${({x:13,y:14,rotation:15,scaleX:16,scaleY:17,opacity:18})[prop]}">${frames.map(([f,val])=>`<KeyFrameDouble frame="${f}" value="${val}" interpolationType="linear"/>`).join('')}</KeyedProperty></KeyedObject>`;
 const animations=[];function anim(name,duration,keys,loop='oneShot'){const aid=id('anim_'+name);animations.push(`<LinearAnimation id="${aid}" name="${name}" fps="60" duration="${duration}" loopValue="${loop}">${keys.join('')}</LinearAnimation>`);return aid;}
-const rest={cat_root:{y:0},head_group:{y:147,rotation:0},left_upper_front:{y:243,rotation:0},right_upper_front:{y:243,rotation:0},left_lower_front:{y:32,rotation:0},right_lower_front:{y:32,rotation:0},left_paw:{y:48,rotation:0},right_paw:{y:48,rotation:0},left_thigh:{y:272,rotation:0},right_thigh:{y:272,rotation:0}};
+const rest={cat_root:{x:0,y:0},head_group:{x:163,y:147,rotation:0},body_group:{x:162,y:245,rotation:0},cream_chest:{x:162,y:222},left_upper_front:{x:140,y:243,rotation:0},right_upper_front:{x:186,y:243,rotation:0},left_lower_front:{x:0,y:32,rotation:0},right_lower_front:{x:0,y:32,rotation:0},left_paw:{x:0,y:48,rotation:0,scaleY:1},right_paw:{x:0,y:48,rotation:0,scaleY:1},left_thigh:{x:133,y:272,rotation:0},right_thigh:{x:193,y:272,rotation:0},left_rear_lower:{x:0,y:33},right_rear_lower:{x:0,y:33},left_rear_paw:{x:0,y:17,scaleY:1},right_rear_paw:{x:0,y:17,scaleY:1},tail_base:{rotation:0}};
 function pose(name,overrides={},duration=60,loop='oneShot'){const keys=[];for(const [part,props] of Object.entries(rest))for(const [prop,value] of Object.entries(props)){const frames=overrides[part]?.[prop];keys.push(key(part,prop,Array.isArray(frames)?frames:[[0,frames??value]]));}return anim(name,duration,keys,loop);}
 rest.left_gaze_drift={x:0,y:0};rest.right_gaze_drift={x:0,y:0};
-pose('Idle');
+rest.left_peek_ear={rotation:0};
+pose('Idle',{head_group:{rotation:[[0,0],[190,0],[220,.005],[310,.003],[440,-.003],[600,0]],y:[[0,147],[175,146.8],[270,147.2],[430,146.9],[600,147]]},left_gaze_drift:{x:[[0,0],[140,0],[175,.6],[280,.6],[320,-.4],[470,-.4],[600,0]]},right_gaze_drift:{x:[[0,0],[140,0],[175,.6],[280,.6],[320,-.4],[470,-.4],[600,0]]}},600,'loop');
 const glance=[[0,0],[35,0],[65,-2],[110,-2],[145,2],[190,2],[220,0],[240,0]];
-pose('Looking',{head_group:{rotation:glance.map(([f,v])=>[f,v*.015])},left_gaze_drift:{x:glance},right_gaze_drift:{x:glance}},240,'loop');
-const peek={head_group:{y:166,rotation:.035},left_upper_front:{y:215,rotation:-.12},right_upper_front:{y:215,rotation:.12},left_lower_front:{y:10},right_lower_front:{y:10},left_paw:{y:22,rotation:.12},right_paw:{y:22,rotation:-.12}};
-pose('PeekHidden',{...peek,cat_root:{y:260}});pose('PeekHold',peek);
-for(const [name,duration,amplitude] of [['Walk',64,7],['Trot',40,11]]){
- const wave=(base,a,phase=0)=>Array.from({length:17},(_,i)=>[i*duration/16,base+Math.sin(i/16*Math.PI*2+phase)*a]);const motions={cat_root:{y:Array.from({length:17},(_,i)=>[i*duration/16,-(Math.sin(i/16*Math.PI*4)**2)*2])},head_group:{rotation:wave(0,.016)}};
- for(const [side,phase] of [['left',0],['right',Math.PI]]){motions[`${side}_upper_front`]={y:wave(243,amplitude,phase),rotation:wave(0,.04,phase)};motions[`${side}_lower_front`]={y:wave(32,amplitude*.3,phase),rotation:wave(0,.035,phase)};motions[`${side}_paw`]={y:wave(48,amplitude*.2,phase),rotation:wave(0,.035,phase+1)};motions[`${side}_thigh`]={y:wave(272,amplitude*.55,phase+Math.PI),rotation:wave(0,.03,phase+Math.PI)};}
- pose(name,motions,duration,'loop');
+pose('Looking',{head_group:{rotation:glance.map(([f,v])=>[Math.min(240,f+10),v*.012])},left_gaze_drift:{x:glance},right_gaze_drift:{x:glance}},240,'loop');
+const peek={head_group:{y:166,rotation:.025},left_upper_front:{y:215},right_upper_front:{y:215},left_lower_front:{y:10},right_lower_front:{y:10},left_paw:{y:22},right_paw:{y:22}};
+const peekStops=[['PeekHidden',0,270],['PeekEars',25,180],['PeekPause',35,180],['PeekEyes',50,85],['PeekScan',65,45],['PeekReach',75,0],['PeekOvershoot',85,-3],['PeekEar',92,-1],['PeekHold',100,0]];
+for(const [name,progress,y] of peekStops){const amount=Math.max(0,Math.min(1,(progress-50)/25));const arm=243+(215-243)*amount,lower=32+(10-32)*amount,paw=48+(22-48)*amount;pose(name,{...peek,cat_root:{y},head_group:{y:166,rotation:progress>85?.025:0},left_peek_ear:{rotation:progress===92?-.07:0},left_upper_front:{y:arm},right_upper_front:{y:arm+((progress===65)?3:0)},left_lower_front:{y:lower},right_lower_front:{y:lower},left_paw:{y:paw,scaleY:progress===85?.93:1},right_paw:{y:paw,scaleY:progress===85?.95:1},left_gaze_drift:{x:progress===50?-2:progress===65?2:0},right_gaze_drift:{x:progress===50?-2:progress===65?2:0}});}
+// Stance endpoints are fixed in artboard space. Local knee/paw coordinates
+// compensate shoulder/hip translations; the same evaluated samples drive QA.
+const gaitSamples={};
+for(const [name,duration,lift,duty] of [['Walk',57,8,.69],['Trot',36,12,.55]]){
+ const motions={},samples=[],put=(part,prop,f,v)=>{motions[part]??={};motions[part][prop]??=[];motions[part][prop].push([f,v]);};
+ for(let frame=0;frame<=duration;frame++){
+  const t=frame/duration,theta=t*Math.PI*2,sway=Math.sin(theta)*(name==='Walk'?1.3:1.7),bob=(1-Math.cos(theta*2))*(name==='Walk'?.45:.75);
+  put('body_group','x',frame,162+sway);put('body_group','y',frame,245+bob);put('body_group','rotation',frame,sway*.003);
+  put('cream_chest','x',frame,162+sway*.7);put('cream_chest','y',frame,222+bob*.6);
+  put('head_group','x',frame,163+sway*.32);put('head_group','y',frame,147+bob*.3);put('head_group','rotation',frame,-sway*.0015);
+  put('tail_base','rotation',frame,-sway*(name==='Walk'?.004:.006));const feet={};
+  for(const [s,front,offset] of [['left',true,name==='Walk'?.25:0],['right',true,name==='Walk'?.75:.5],['left',false,name==='Walk'?0:.5],['right',false,name==='Walk'?.5:0]]){
+   const phase=(t+1-offset)%1,swing=phase<duty?0:(phase-duty)/(1-duty),height=swing?Math.sin(Math.PI*swing)**2*lift:0;
+   const side=s==='left'?-1:1,baseX=front?(s==='left'?140:186):(s==='left'?133:193),baseY=front?323:322;
+   const footX=baseX+side*(swing?Math.sin(Math.PI*2*swing)*1.1:0),footY=baseY-height;
+   const shoulderX=baseX+(front?sway:-sway*.75),shoulderY=(front?243:272)+bob*(front?1:.65);
+   const kneeX=baseX+(front?sway*.4:-sway*.3)+side*height*.14,kneeY=(front?275:305)+bob*.4-height*.24;
+   const upper=front?`${s}_upper_front`:`${s}_thigh`,lower=front?`${s}_lower_front`:`${s}_rear_lower`,paw=front?`${s}_paw`:`${s}_rear_paw`;
+   put(upper,'x',frame,shoulderX);put(upper,'y',frame,shoulderY);put(lower,'x',frame,kneeX-shoulderX);put(lower,'y',frame,kneeY-shoulderY);put(paw,'x',frame,footX-kneeX);put(paw,'y',frame,footY-kneeY);
+   const compression=phase<.08?Math.sin(phase/.08*Math.PI)*.04:0;put(paw,'scaleY',frame,1-compression);
+   feet[paw]={x:footX,y:footY,contact:phase<duty};
+  } samples.push({frame,feet});
+ }
+ gaitSamples[name]={duration,fps:60,samples};pose(name,motions,duration,'loop');
 }
-anim('Breathing',288,[key('body_group','scaleY',[[0,1],[72,1.014],[144,1],[216,.995],[288,1]])],'loop');
+fs.writeFileSync(`${out}/gait-samples.json`,JSON.stringify(gaitSamples,null,2));
+anim('Breathing',1038,[key('body_group','scaleY',[[0,1],[83,1.008],[206,1],[310,1.006],[440,1],[558,1.009],[682,1],[804,1.006],[910,1.002],[1038,1]])],'loop');
 anim('Ears',360,[key('left_ear','rotation',[[0,0],[112,0],[118,-.065],[125,.02],[135,0],[360,0]]),key('right_ear','rotation',[[0,0],[230,0],[238,.05],[249,0],[360,0]])],'loop');
-anim('Tail',240,Array.from({length:5},(_,i)=>key(`tail_segment_${i}`,'rotation',Array.from({length:17},(_,f)=>[f*15,Math.sin(f/16*Math.PI*2-i*.4)*(.018+i*.007)]))),'loop');
+anim('Tail',1140,Array.from({length:5},(_,i)=>key(`tail_segment_${i}`,'rotation',Array.from({length:39},(_,f)=>[f*30,Math.sin(f/38*Math.PI*2-i*.3)*(.009+i*.004)]))),'loop');
 const lidKeys=(closed=false)=>['left','right'].flatMap(s=>[key(`${s}_upper_eyelid`,'y',closed?[[0,-26],[158,-26],[164,24],[170,-26],[240,-26]]:[[0,-26]]),key(`${s}_lower_eyelid`,'y',closed?[[0,24],[158,24],[164,16],[170,24],[240,24]]:[[0,24]])]);
-anim('Blink',240,lidKeys(true),'loop');anim('EyesOpen',60,lidKeys());
+const blinkTimes=[137,391,559,602,883,1161,1488,1764];
+anim('Blink',1860,['left','right'].flatMap(s=>[key(`${s}_upper_eyelid`,'y',[[0,-26],...blinkTimes.flatMap(f=>[[f,-26],[f+5,12],[f+8,12],[f+14,-26]]),[1860,-26]]),key(`${s}_lower_eyelid`,'y',[[0,24],...blinkTimes.flatMap(f=>[[f,24],[f+5,0],[f+8,0],[f+14,24]]),[1860,24]])]),'loop');anim('EyesOpen',60,lidKeys());
 for(const [label,axis,offset] of [['GazeLeft','x',-5],['GazeCenterX','x',0],['GazeRight','x',5],['GazeUp','y',-3],['GazeCenterY','y',0],['GazeDown','y',3]])anim(label,60,['left','right'].map(s=>key(`${s}_pupil`,axis,[[0,offset]])));
 for(const [name,amount] of [['NoHat',0],['Hat',1]])anim(name,60,[key('birthday_hat','opacity',[[0,amount]])]);
 for(const [name,yl,yr,rl,rr] of [['Gentle',0,0,0,0],['Focused',20,20,.12,-.12],['Mischievous',28,14,-.1,-.05]])anim(name,60,[key('left_expression_lid','y',[[0,yl]]),key('right_expression_lid','y',[[0,yr]]),key('left_expression_lid','rotation',[[0,rl]]),key('right_expression_lid','rotation',[[0,rr]])]);
 const input=(name,type,value)=>`<StateMachine${type} id="${id('input_'+name)}" name="${name}" value="${value}"/>`;
+for(const [name,amount] of [['MarkingsOn',1],['MarkingsOff',0]])anim(name,60,markingNames.map(n=>key(n,'opacity',[[0,amount]])));
 const inputs=[input('state','Number',0),input('scrollProgress','Number',100),input('lookX','Number',50),input('lookY','Number',50),input('moveSpeed','Number',0),input('expression','Number',0),input('blinkEnabled','Bool',true),input('hasHat','Bool',false)];
 const condition=(name,value)=>typeof value==='boolean'?`<TransitionBoolCondition inputId="${id('input_'+name)}" opValue="${value?'equal':'notEqual'}"/>`:`<TransitionNumberCondition inputId="${id('input_'+name)}" opValue="equal" value="${value}"/>`;
 const transition=(to,cond='',blend=false,duration=450)=>`<${blend?'BlendStateTransition':'StateTransition'} stateToId="${id('state_'+to)}" duration="${duration}" interpolationType="cubic"><CubicEaseInterpolator x1=".42" y1="0" x2=".58" y2="1"/>${cond}</${blend?'BlendStateTransition':'StateTransition'}>`;
 const state=(name,animation,x,children='')=>`<AnimationState id="${id('state_'+name)}" x="${x}" y="0" animationId="${id('anim_'+animation)}">${children}</AnimationState>`;
 const layer=(name,first,states)=>`<StateMachineLayer name="${name}"><AnyState x="0" y="-140"/><ExitState x="600" y="-140"/><EntryState x="0" y="0">${transition(first,'',false,0)}</EntryState>${states}</StateMachineLayer>`;
 function blend(name,inputName,items,x,children=''){return `<BlendState1DInput id="${id('state_'+name)}" inputId="${id('input_'+inputName)}" x="${x}" y="0">${items.map(([a,v])=>`<BlendAnimation1D animationId="${id('anim_'+a)}" value="${v}"/>`).join('')}${children}</BlendState1DInput>`;}
-const bodyNames=['Idle','Peeking','Looking','Walking'];const body=bodyNames.map((n,i)=>{const transitions=bodyNames.filter(t=>t!==n).map(t=>transition(t,condition('state',bodyNames.indexOf(t)),i===1||i===3,550)).join('');return i===1?blend(n,'scrollProgress',[['PeekHidden',0],['PeekHold',100]],i*220+180,transitions):i===3?blend(n,'moveSpeed',[['Walk',0],['Trot',100]],i*220+180,transitions):state(n,n,i*220+180,transitions);}).join('');
+const bodyNames=['Idle','Peeking','Looking','Walking'];const body=bodyNames.map((n,i)=>{const transitions=bodyNames.filter(t=>t!==n).map(t=>transition(t,condition('state',bodyNames.indexOf(t)),i===1||i===3,650)).join('');return i===1?blend(n,'scrollProgress',peekStops.map(([a,v])=>[a,v]),i*220+180,transitions):i===3?blend(n,'moveSpeed',[['Walk',0],['Trot',100]],i*220+180,transitions):state(n,n,i*220+180,transitions);}).join('');
 const layers=[layer('Body_Action','Idle',body),layer('Breathing','Breathing',state('Breathing','Breathing',180)),layer('Ear_Reaction','Ears',state('Ears','Ears',180)),layer('Tail_Behavior','Tail',state('Tail','Tail',180)),layer('Face_Reaction','Blink',state('Blink','Blink',180,transition('EyesOpen',condition('blinkEnabled',false)))+state('EyesOpen','EyesOpen',400,transition('Blink',condition('blinkEnabled',true)))),layer('Gaze_X','GazeX',blend('GazeX','lookX',[['GazeLeft',0],['GazeCenterX',50],['GazeRight',100]],180)),layer('Gaze_Y','GazeY',blend('GazeY','lookY',[['GazeUp',0],['GazeCenterY',50],['GazeDown',100]],180)),layer('Accessories','NoHat',state('NoHat','NoHat',180,transition('Hat',condition('hasHat',true),false,250))+state('Hat','Hat',400,transition('NoHat',condition('hasHat',false),false,250))),layer('Expression','Gentle',['Gentle','Focused','Mischievous'].map((n,i)=>state(n,n,180+i*220,['Gentle','Focused','Mischievous'].filter(t=>t!==n).map(t=>transition(t,condition('expression',['Gentle','Focused','Mischievous'].indexOf(t)),false,280)).join(''))).join(''))];
+inputs.push(input('showMarkings','Bool',true));
+inputs.push(input('headLook','Number',50),input('earLook','Number',50));
+for(const [name,rotation] of [['HeadLeft',-.025],['HeadCenter',0],['HeadRight',.025]])anim(name,60,[key('head_response','rotation',[[0,rotation]])]);
+for(const [name,amount] of [['EarLeft',-1],['EarCenter',0],['EarRight',1]])anim(name,60,['left','right'].map(s=>key(`${s}_ear_follow`,'rotation',[[0,amount*(s==='left'?.013:.011)]])));
+layers.push(layer('Head_Tracking','HeadTracking',blend('HeadTracking','headLook',[['HeadLeft',0],['HeadCenter',50],['HeadRight',100]],180)),layer('Ear_Tracking','EarTracking',blend('EarTracking','earLook',[['EarLeft',0],['EarCenter',50],['EarRight',100]],180)));
+layers.push(layer('Marking_Review','MarkingsOn',state('MarkingsOn','MarkingsOn',180,transition('MarkingsOff',condition('showMarkings',false),false,0))+state('MarkingsOff','MarkingsOff',400,transition('MarkingsOn',condition('showMarkings',true),false,0))));
 const doc=`<Rive version="1" kind="fragment"><Artboard width="300" height="370" name="Marmalade_Main" id="0:1" defaultStateMachineId="0:2" styleId="0:4"><LayoutComponentStyle id="0:4"/>${artwork}${animations.join('')}<StateMachine name="Marmalade_Main" id="0:2">${inputs.join('')}${layers.join('')}</StateMachine></Artboard></Rive>`;
 fs.writeFileSync('rive-foundation/scene.rml',doc);
 fs.writeFileSync(`${out}/id-map.json`,JSON.stringify(ids,null,2));

@@ -1,0 +1,882 @@
+[
+  {
+    "time": 1.5832679999999992,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.4, 335.2) 63.3 u/s",
+      "left_rear_paw": "swing (132.4, 331.3) 40.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 1.6832679999999989,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.0, 335.9) 17.7 u/s",
+      "left_rear_paw": "swing (132.6, 324.3) 51.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 1.7831679999999985,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (134.1, 328.6) 84.7 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 1.8831679999999984,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "swing (139.0, 330.6) 83.6 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 331.6) 8.4 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 1.9831679999999983,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "swing (140.9, 329.6) 59.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 2.0831679999999984,
+    "state": 3,
+    "moveSpeed": 0,
+    "paws": {
+      "left_paw": "swing (140.1, 336.0) 32.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (194.0, 329.7) 70.0 u/s"
+    }
+  },
+  {
+    "time": 2.183167999999998,
+    "state": 3,
+    "moveSpeed": 25.732742309570312,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 2.3 u/s",
+      "right_paw": "swing (186.3, 334.9) 41.0 u/s",
+      "left_rear_paw": "swing (132.7, 330.9) 41.0 u/s",
+      "right_rear_paw": "swing (193.0, 326.5) 26.9 u/s"
+    }
+  },
+  {
+    "time": 2.2832679999999974,
+    "state": 3,
+    "moveSpeed": 48.0557975769043,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.9, 328.7) 27.1 u/s",
+      "left_rear_paw": "swing (133.2, 324.8) 26.6 u/s",
+      "right_rear_paw": "swing (192.7, 331.3) 37.8 u/s"
+    }
+  },
+  {
+    "time": 2.3833679999999977,
+    "state": 3,
+    "moveSpeed": 63.66904830932617,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.7, 334.1) 64.6 u/s",
+      "left_rear_paw": "swing (133.4, 331.3) 69.5 u/s",
+      "right_rear_paw": "contact (193.0, 331.9) 1.3 u/s"
+    }
+  },
+  {
+    "time": 2.4831679999999974,
+    "state": 3,
+    "moveSpeed": 74.56206512451172,
+    "paws": {
+      "left_paw": "swing (139.1, 332.7) 104.3 u/s",
+      "right_paw": "swing (185.9, 335.6) 11.4 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.6 u/s",
+      "right_rear_paw": "swing (193.9, 328.7) 104.3 u/s"
+    }
+  },
+  {
+    "time": 2.583167999999997,
+    "state": 3,
+    "moveSpeed": 82.2017822265625,
+    "paws": {
+      "left_paw": "swing (140.4, 324.9) 29.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.5 u/s",
+      "left_rear_paw": "contact (133.0, 331.8) 2.3 u/s",
+      "right_rear_paw": "swing (192.6, 320.9) 29.5 u/s"
+    }
+  },
+  {
+    "time": 2.683167999999997,
+    "state": 3,
+    "moveSpeed": 87.54707336425781,
+    "paws": {
+      "left_paw": "swing (140.5, 335.4) 82.9 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 331.9) 1.8 u/s",
+      "right_rear_paw": "swing (192.5, 331.4) 82.8 u/s"
+    }
+  },
+  {
+    "time": 2.7831679999999968,
+    "state": 3,
+    "moveSpeed": 91.28703308105469,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.2 u/s",
+      "right_paw": "swing (187.0, 332.2) 116.6 u/s",
+      "left_rear_paw": "swing (132.0, 328.2) 116.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.2 u/s"
+    }
+  },
+  {
+    "time": 2.883167999999997,
+    "state": 3,
+    "moveSpeed": 93.90377044677734,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.2 u/s",
+      "right_paw": "swing (185.6, 324.5) 36.9 u/s",
+      "left_rear_paw": "swing (133.4, 320.5) 36.9 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 2.9831679999999965,
+    "state": 3,
+    "moveSpeed": 95.73463439941406,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.2 u/s",
+      "right_paw": "swing (185.6, 335.5) 81.5 u/s",
+      "left_rear_paw": "swing (133.4, 331.5) 81.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 3.0831679999999966,
+    "state": 3,
+    "moveSpeed": 97.01564025878906,
+    "paws": {
+      "left_paw": "swing (139.0, 332.0) 119.3 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (194.0, 328.0) 119.4 u/s"
+    }
+  },
+  {
+    "time": 3.1831679999999962,
+    "state": 3,
+    "moveSpeed": 97.91192626953125,
+    "paws": {
+      "left_paw": "swing (140.4, 324.5) 38.6 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.6, 320.5) 38.7 u/s"
+    }
+  },
+  {
+    "time": 3.283167999999996,
+    "state": 3,
+    "moveSpeed": 98.53903198242188,
+    "paws": {
+      "left_paw": "swing (140.4, 335.5) 80.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.6, 331.5) 80.5 u/s"
+    }
+  },
+  {
+    "time": 3.3830679999999957,
+    "state": 3,
+    "moveSpeed": 98.97743225097656,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (187.0, 332.0) 119.8 u/s",
+      "left_rear_paw": "swing (132.0, 328.0) 119.8 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 3.4831679999999956,
+    "state": 3,
+    "moveSpeed": 99.28478240966797,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 324.5) 39.2 u/s",
+      "left_rear_paw": "swing (133.4, 320.5) 39.2 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 3.5831679999999952,
+    "state": 3,
+    "moveSpeed": 99.49958038330078,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 335.5) 80.1 u/s",
+      "left_rear_paw": "swing (133.4, 331.5) 80.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 3.6831679999999953,
+    "state": 3,
+    "moveSpeed": 99.64987182617188,
+    "paws": {
+      "left_paw": "swing (139.0, 332.0) 120.2 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (194.0, 328.0) 120.2 u/s"
+    }
+  },
+  {
+    "time": 3.783667999999995,
+    "state": 3,
+    "moveSpeed": 99.75546264648438,
+    "paws": {
+      "left_paw": "swing (140.5, 324.6) 39.8 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.5, 320.6) 39.8 u/s"
+    }
+  },
+  {
+    "time": 3.8830679999999953,
+    "state": 3,
+    "moveSpeed": 99.82854461669922,
+    "paws": {
+      "left_paw": "swing (140.4, 335.5) 80.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.6, 331.5) 80.0 u/s"
+    }
+  },
+  {
+    "time": 3.9831679999999965,
+    "state": 3,
+    "moveSpeed": 99.88008117675781,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (187.0, 332.0) 119.9 u/s",
+      "left_rear_paw": "swing (132.0, 328.0) 119.9 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 4.083167999999997,
+    "state": 3,
+    "moveSpeed": 99.91609191894531,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 324.5) 39.5 u/s",
+      "left_rear_paw": "swing (133.4, 320.5) 39.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 4.183067999999998,
+    "state": 3,
+    "moveSpeed": 99.94126892089844,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 335.5) 79.9 u/s",
+      "left_rear_paw": "swing (133.4, 331.5) 80.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 4.283067999999999,
+    "state": 3,
+    "moveSpeed": 99.95890808105469,
+    "paws": {
+      "left_paw": "swing (139.0, 332.0) 120.1 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (194.0, 328.0) 120.1 u/s"
+    }
+  },
+  {
+    "time": 4.383068000000001,
+    "state": 3,
+    "moveSpeed": 78.80278015136719,
+    "paws": {
+      "left_paw": "swing (140.3, 325.0) 42.5 u/s",
+      "right_paw": "contact (185.9, 335.8) 4.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.7, 321.0) 42.5 u/s"
+    }
+  },
+  {
+    "time": 4.483068000000001,
+    "state": 3,
+    "moveSpeed": 55.136138916015625,
+    "paws": {
+      "left_paw": "swing (140.4, 335.3) 72.3 u/s",
+      "right_paw": "contact (186.0, 335.9) 3.5 u/s",
+      "left_rear_paw": "swing (132.7, 331.0) 27.0 u/s",
+      "right_rear_paw": "swing (192.6, 331.3) 72.3 u/s"
+    }
+  },
+  {
+    "time": 4.583068000000003,
+    "state": 3,
+    "moveSpeed": 38.57724380493164,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.8 u/s",
+      "right_paw": "swing (186.5, 334.2) 52.0 u/s",
+      "left_rear_paw": "swing (132.8, 326.7) 54.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.6 u/s"
+    }
+  },
+  {
+    "time": 4.683068000000003,
+    "state": 3,
+    "moveSpeed": 26.991439819335938,
+    "paws": {
+      "left_paw": "swing (139.5, 335.2) 34.2 u/s",
+      "right_paw": "swing (185.9, 332.0) 24.5 u/s",
+      "left_rear_paw": "swing (133.4, 327.7) 53.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 4.7830680000000045,
+    "state": 3,
+    "moveSpeed": 18.885169982910156,
+    "paws": {
+      "left_paw": "swing (139.8, 329.9) 36.1 u/s",
+      "right_paw": "swing (185.9, 335.8) 22.0 u/s",
+      "left_rear_paw": "swing (133.1, 331.8) 28.9 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 4.883068000000006,
+    "state": 3,
+    "moveSpeed": 13.213435173034668,
+    "paws": {
+      "left_paw": "swing (140.7, 333.2) 52.2 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.1 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.1 u/s",
+      "right_rear_paw": "swing (193.2, 331.4) 17.1 u/s"
+    }
+  },
+  {
+    "time": 4.9830680000000065,
+    "state": 3,
+    "moveSpeed": 9.245078086853027,
+    "paws": {
+      "left_paw": "swing (140.0, 334.4) 6.1 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.8, 325.3) 65.3 u/s"
+    }
+  },
+  {
+    "time": 5.082968000000007,
+    "state": 3,
+    "moveSpeed": 6.470837593078613,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 6.3 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.0, 326.7) 70.3 u/s"
+    }
+  },
+  {
+    "time": 5.183168000000009,
+    "state": 3,
+    "moveSpeed": 4.524233818054199,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (187.1, 332.8) 81.0 u/s",
+      "left_rear_paw": "contact (133.0, 331.8) 5.2 u/s",
+      "right_rear_paw": "swing (193.0, 331.9) 11.9 u/s"
+    }
+  },
+  {
+    "time": 5.282968000000008,
+    "state": 3,
+    "moveSpeed": 3.1677439212799072,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 328.2) 28.4 u/s",
+      "left_rear_paw": "contact (133.0, 331.6) 2.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.1 u/s"
+    }
+  },
+  {
+    "time": 5.3830680000000095,
+    "state": 3,
+    "moveSpeed": 2.2155921459198,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.4, 335.2) 64.2 u/s",
+      "left_rear_paw": "swing (132.4, 331.3) 37.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 5.482968000000009,
+    "state": 3,
+    "moveSpeed": 1.550742745399475,
+    "paws": {
+      "left_paw": "contact (140.0, 335.9) 1.8 u/s",
+      "right_paw": "swing (186.0, 335.9) 17.1 u/s",
+      "left_rear_paw": "swing (132.5, 324.5) 51.6 u/s",
+      "right_rear_paw": "contact (193.0, 331.9) 1.8 u/s"
+    }
+  },
+  {
+    "time": 5.58306800000001,
+    "state": 3,
+    "moveSpeed": 1.0846247673034668,
+    "paws": {
+      "left_paw": "contact (140.0, 335.9) 0.9 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (134.1, 328.6) 83.5 u/s",
+      "right_rear_paw": "contact (193.0, 331.9) 0.9 u/s"
+    }
+  },
+  {
+    "time": 5.683068000000011,
+    "state": 3,
+    "moveSpeed": 0.7588821649551392,
+    "paws": {
+      "left_paw": "swing (139.0, 330.7) 82.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 331.6) 8.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.7 u/s"
+    }
+  },
+  {
+    "time": 5.783068000000012,
+    "state": 3,
+    "moveSpeed": 0.5309690237045288,
+    "paws": {
+      "left_paw": "swing (140.9, 329.6) 58.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.6 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 5.883068000000013,
+    "state": 3,
+    "moveSpeed": 0.37150442600250244,
+    "paws": {
+      "left_paw": "swing (140.1, 336.0) 32.2 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.3 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.3 u/s",
+      "right_rear_paw": "swing (194.0, 329.8) 69.5 u/s"
+    }
+  },
+  {
+    "time": 5.983068000000014,
+    "state": 3,
+    "moveSpeed": 0.25993144512176514,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.2 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.2 u/s",
+      "right_rear_paw": "swing (192.9, 324.1) 23.9 u/s"
+    }
+  },
+  {
+    "time": 6.082968000000014,
+    "state": 3,
+    "moveSpeed": 0.18193186819553375,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.2 u/s",
+      "right_paw": "swing (186.3, 335.8) 24.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.1, 330.5) 75.1 u/s"
+    }
+  },
+  {
+    "time": 6.1830680000000156,
+    "state": 3,
+    "moveSpeed": 0.12724728882312775,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.1 u/s",
+      "right_paw": "swing (186.7, 328.9) 66.4 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.0, 331.7) 7.5 u/s"
+    }
+  },
+  {
+    "time": 6.282968000000015,
+    "state": 3,
+    "moveSpeed": 0.08906323462724686,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.1 u/s",
+      "right_paw": "swing (184.9, 331.5) 81.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.1 u/s"
+    }
+  },
+  {
+    "time": 6.382968000000017,
+    "state": 3,
+    "moveSpeed": 0.06231509521603584,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.0, 335.6) 17.8 u/s",
+      "left_rear_paw": "swing (131.9, 327.7) 84.4 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 6.482968000000018,
+    "state": 3,
+    "moveSpeed": 0.043600160628557205,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.7, 324.8) 43.3 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 6.58296800000002,
+    "state": 3,
+    "moveSpeed": 0.03050583228468895,
+    "paws": {
+      "left_paw": "swing (139.2, 334.6) 55.7 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.4, 331.7) 48.3 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 6.682968000000021,
+    "state": 3,
+    "moveSpeed": 0.02134409174323082,
+    "paws": {
+      "left_paw": "swing (139.8, 328.1) 35.6 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 332.0) 9.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 6.7829680000000225,
+    "state": 3,
+    "moveSpeed": 0.014933873899281025,
+    "paws": {
+      "left_paw": "swing (141.0, 333.6) 82.7 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.1, 332.0) 3.9 u/s"
+    }
+  },
+  {
+    "time": 6.882968000000024,
+    "state": 3,
+    "moveSpeed": 0.010448821820318699,
+    "paws": {
+      "left_paw": "contact (140.0, 335.5) 0.8 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.9, 325.7) 77.4 u/s"
+    }
+  },
+  {
+    "time": 6.982868000000026,
+    "state": 3,
+    "moveSpeed": 0.007313365116715431,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.0, 326.5) 72.2 u/s"
+    }
+  },
+  {
+    "time": 7.082968000000027,
+    "state": 3,
+    "moveSpeed": 0.005115134175866842,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (187.1, 332.7) 79.6 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.0, 331.9) 12.4 u/s"
+    }
+  },
+  {
+    "time": 7.182968000000028,
+    "state": 3,
+    "moveSpeed": 0.0035789189860224724,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 328.3) 28.2 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.28286800000003,
+    "state": 3,
+    "moveSpeed": 0.0025049657560884953,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.3, 335.2) 63.5 u/s",
+      "left_rear_paw": "swing (132.4, 331.3) 39.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.38286800000003,
+    "state": 3,
+    "moveSpeed": 0.001752655953168869,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.0, 335.9) 17.5 u/s",
+      "left_rear_paw": "swing (132.5, 324.4) 51.8 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.482968000000031,
+    "state": 3,
+    "moveSpeed": 0.0012258472852408886,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (134.1, 328.5) 84.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.5828680000000315,
+    "state": 3,
+    "moveSpeed": 0.0008579979767091572,
+    "paws": {
+      "left_paw": "swing (139.0, 330.7) 83.6 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 331.6) 8.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.682968000000033,
+    "state": 3,
+    "moveSpeed": 0.0006001032306812704,
+    "paws": {
+      "left_paw": "swing (140.9, 329.5) 59.1 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 7.782968000000033,
+    "state": 3,
+    "moveSpeed": 0.00041987572330981493,
+    "paws": {
+      "left_paw": "swing (140.1, 336.0) 32.3 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (194.0, 329.8) 69.7 u/s"
+    }
+  },
+  {
+    "time": 7.882868000000034,
+    "state": 3,
+    "moveSpeed": 0.0002938804973382503,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.5 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.9, 324.0) 24.0 u/s"
+    }
+  },
+  {
+    "time": 7.982868000000035,
+    "state": 3,
+    "moveSpeed": 0.00020562011923175305,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.3, 335.8) 23.9 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.1, 330.5) 75.5 u/s"
+    }
+  },
+  {
+    "time": 8.082868000000035,
+    "state": 3,
+    "moveSpeed": 0.000143866753205657,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.7, 328.9) 66.5 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.0, 331.7) 7.3 u/s"
+    }
+  },
+  {
+    "time": 8.182868000000035,
+    "state": 3,
+    "moveSpeed": 0.00010065961396321654,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (184.9, 331.5) 81.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 8.282868000000033,
+    "state": 3,
+    "moveSpeed": 0.00007042876677587628,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.0, 335.6) 17.6 u/s",
+      "left_rear_paw": "swing (131.9, 327.7) 84.3 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 8.38286800000003,
+    "state": 3,
+    "moveSpeed": 0.00004927707777824253,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.7, 324.8) 43.1 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 8.482868000000028,
+    "state": 3,
+    "moveSpeed": 0.00003447782000876032,
+    "paws": {
+      "left_paw": "swing (139.2, 334.6) 55.7 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.4, 331.7) 48.2 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 8.582868000000028,
+    "state": 3,
+    "moveSpeed": 0.000024123182811308652,
+    "paws": {
+      "left_paw": "swing (139.8, 328.1) 35.7 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 332.0) 9.2 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 8.682868000000026,
+    "state": 3,
+    "moveSpeed": 0.000016878328096936457,
+    "paws": {
+      "left_paw": "swing (141.0, 333.6) 82.7 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.1, 332.0) 3.9 u/s"
+    }
+  },
+  {
+    "time": 8.782868000000025,
+    "state": 3,
+    "moveSpeed": 0.000011809302122856025,
+    "paws": {
+      "left_paw": "contact (140.0, 335.5) 1.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.9, 325.7) 77.6 u/s"
+    }
+  },
+  {
+    "time": 8.882868000000023,
+    "state": 3,
+    "moveSpeed": 0.000008262643859779928,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (192.0, 326.5) 72.1 u/s"
+    }
+  },
+  {
+    "time": 8.982868000000023,
+    "state": 3,
+    "moveSpeed": 0.000005781144864158705,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (187.1, 332.8) 79.5 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "swing (193.0, 331.9) 12.4 u/s"
+    }
+  },
+  {
+    "time": 9.08286800000002,
+    "state": 3,
+    "moveSpeed": 0.000004044908564537764,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.6, 328.3) 28.1 u/s",
+      "left_rear_paw": "contact (133.0, 332.0) 0.0 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 9.182868000000019,
+    "state": 3,
+    "moveSpeed": 0.0000028301114980422426,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (185.3, 335.2) 63.5 u/s",
+      "left_rear_paw": "swing (132.4, 331.3) 39.5 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 9.282868000000018,
+    "state": 3,
+    "moveSpeed": 0.0000019801514099526685,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "swing (186.0, 335.9) 17.4 u/s",
+      "left_rear_paw": "swing (132.5, 324.4) 51.9 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 9.382868000000016,
+    "state": 3,
+    "moveSpeed": 0.0000013854577218808117,
+    "paws": {
+      "left_paw": "contact (140.0, 336.0) 0.0 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (134.1, 328.5) 84.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  },
+  {
+    "time": 9.482768000000016,
+    "state": 3,
+    "moveSpeed": 9.697131417851779e-7,
+    "paws": {
+      "left_paw": "swing (139.0, 330.7) 83.6 u/s",
+      "right_paw": "contact (186.0, 336.0) 0.0 u/s",
+      "left_rear_paw": "swing (133.0, 331.6) 8.6 u/s",
+      "right_rear_paw": "contact (193.0, 332.0) 0.0 u/s"
+    }
+  }
+]
