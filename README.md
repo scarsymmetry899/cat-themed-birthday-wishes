@@ -8,6 +8,14 @@ An immersive birthday experience led by one consistent orange tabby kitten. The 
 
 **Marmalade V1 remains frozen. The four-state native Rive lab is implemented; final visual/production acceptance is NOT claimed.** The riggable redraw, two expressions, separated vectors, native source/export and responsive test page are available for review. The redraw still looks flatter and more geometric than the painted direction. See [production notes](docs/production-redraw.md) and [QA](docs/qa-log.md) before approving it. No birthday scenes or other twelve body actions were built.
 
+An experimental Blender production branch is also in progress from the approved
+Marmalade reference. The Tripo source has been audited, repaired into a planning
+proxy, converted into a closed 11.2k-face topology candidate, and given separate
+facial controls. The first deformation audit failed the production gate at the
+shoulders, hips and tail, so the 3D asset remains unbound and has not replaced
+the Rive lab. See [`assets/character/3d/README.md`](assets/character/3d/README.md)
+and [`assets/character/3d/qa-log.md`](assets/character/3d/qa-log.md).
+
 ### Phase 2 working artifacts
 
 - `tools/build-character.mjs`: editable vector source generator; creates SVG components and native RML.
