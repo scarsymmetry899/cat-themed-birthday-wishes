@@ -1,6 +1,6 @@
 # Marmalade 3D production assets
 
-Status: **quad-candidate / facial-control / deformation-audit checkpoint**.
+Status: **corrective-bind / marking-blockout checkpoint**.
 Nothing in this directory is approved as the final deforming mesh yet.
 
 ## Source files
@@ -26,6 +26,11 @@ Nothing in this directory is approved as the final deforming mesh yet.
 - `blender/marmalade-deformation-audit-v03.blend` — disposable proximity-weight
   bind and joint-range action used to expose topology/weighting failures. It is
   not the production skin.
+- `blender/marmalade-corrective-rig-v01.blend` — region-aware weighted candidate,
+  corrected tail chain, and corrective joint-range action.
+- `blender/marmalade-marked-candidate-v05.blend` — latest deformation-safe
+  orange/cream/tabby color-blocking candidate. This supersedes the earlier
+  marked-candidate iterations but is not the final painterly coat.
 
 ## Verified source limitations
 
@@ -38,11 +43,12 @@ Nothing in this directory is approved as the final deforming mesh yet.
 
 ## Next acceptance gate
 
-Replace the four temporary triangle caps with authored quad patches. Correct
-the shoulder, belly, hip, hock, and tail-base loops identified by the
-deformation audit, then replace the proximity audit weights with controlled
-production weights. Integrate the eye sockets and closed-lid surface into the
-head mesh. Repaint the approved Marmalade markings before animation.
+Replace the four temporary triangle caps with authored quad patches. Refine the
+current controlled weights for planted rear-paw contact, shoulder/hip weight
+shift, and a stronger tail arc. Integrate the eye sockets and closed-lid surface
+into the head mesh. Convert the current color blocking into the approved warm,
+painterly Marmalade coat and correct the terminal tail silhouette before
+animation acceptance.
 
 Current face inputs on `Marmalade_FaceRoot`:
 

@@ -46,7 +46,7 @@ def main():
             for obj in collection.all_objects:
                 if obj is not None:
                     obj.hide_render = True
-    audit = bpy.data.objects["Marmalade_DeformAudit"]
+    audit = bpy.data.objects.get("Marmalade_WeightedCandidate_v01") or bpy.data.objects["Marmalade_DeformAudit"]
     audit.hide_render = False
 
     target = Vector((-0.08, -0.07, 0.48))
