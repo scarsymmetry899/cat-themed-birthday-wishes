@@ -34,6 +34,9 @@ Nothing in this directory is approved as the final deforming mesh yet.
 - `blender/marmalade-face-integrated-v05.blend` — current head-bone-attached
   face checkpoint with surface eyelids, amber-eye refinement, gaze, blink, and
   focus controls.
+- `blender/marmalade-contact-gaits-v11.blend` — current walk/trot contact proof
+  with two-bone ankle IK, world-oriented paws, rigid paw-weight islands, and
+  measured stance drift. It remains a diagnostic gait checkpoint.
 
 ## Verified source limitations
 
@@ -51,7 +54,9 @@ current controlled weights for planted rear-paw contact, shoulder/hip weight
 shift, and a stronger tail arc. Refine the new surface eyelids into the head
 silhouette and correct eye contour/spacing, whisker curvature, and facial
 warmth. Convert the current color blocking into the approved painterly coat and
-correct the terminal tail silhouette before animation acceptance.
+correct the terminal tail silhouette before animation acceptance. The current
+front paw topology also needs a local rebuild: the far front paw exposes stacked
+toe surfaces during the trot even after rigid paw weighting.
 
 Current face inputs on `Marmalade_FaceRoot`:
 

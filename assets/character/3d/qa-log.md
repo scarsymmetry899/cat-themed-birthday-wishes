@@ -125,3 +125,49 @@ frozen; no additional states or birthday-site work were started.
 but likeness is not accepted: eye contour, eyelid-to-brow transition, whisker
 curvature, and painterly facial warmth still need refinement. No animation
 states or application files were added.
+
+## 2026-09-20 — planted-contact gait proof v11
+
+### Contact rig
+
+- Added four world-space ankle IK targets with two-bone, no-stretch chains.
+- Added world-orientation constraints for the paw bones so paw volume is not
+  forced through the earlier three-bone IK curl.
+- Converted 657 low paw vertices into rigid paw-weight islands to reduce toe
+  separation under lift.
+- Authored a 32-frame walk proof and a 24-frame trot proof. The trot uses the
+  same short step length at a higher cadence rather than a longer, unreachable
+  stride.
+- Added modest pelvis/chest counter-rotation, head stabilization, root rise,
+  and phased tail counterbalance.
+
+### Authored actions
+
+- `Marmalade_WalkContact_Body_v01`
+- `Marmalade_TrotContact_Body_v01`
+- Per-paw target actions named
+  `Marmalade_<WalkContact|TrotContact>_Paw_<front|rear>.<L|R>_v01`
+
+### Contact measurements
+
+- Rear ankle IK error is at or below 0.000006 m in both gaits.
+- Three paw tips are effectively stationary during stance.
+- The worst remaining walk toe movement is 0.001182 m per frame.
+- The worst remaining trot toe movement is 0.001878 m per frame on the front
+  left paw. This is improved but not yet a zero-skate acceptance result.
+
+### Visual audit
+
+- The side and three-quarter renders confirm better paw volume than the first
+  three-bone IK attempt.
+- The far front paw still exposes stacked toe/surface strips at parts of the
+  trot. Rigid paw weights did not fully remove this, indicating a structural
+  paw-topology limitation in the QuadriFlow candidate rather than timing alone.
+- Evidence: `review/contact-gaits-v05-final/`.
+
+### Acceptance status
+
+**Not gait-approved.** Contact timing and target stability are now measurable
+and largely controlled, but the front-paw topology must be rebuilt or locally
+retopologized before a polished walk/trot can be accepted. No additional states
+and no birthday-site implementation were started.
