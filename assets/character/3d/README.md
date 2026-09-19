@@ -31,6 +31,9 @@ Nothing in this directory is approved as the final deforming mesh yet.
 - `blender/marmalade-marked-candidate-v05.blend` — latest deformation-safe
   orange/cream/tabby color-blocking candidate. This supersedes the earlier
   marked-candidate iterations but is not the final painterly coat.
+- `blender/marmalade-face-integrated-v05.blend` — current head-bone-attached
+  face checkpoint with surface eyelids, amber-eye refinement, gaze, blink, and
+  focus controls.
 
 ## Verified source limitations
 
@@ -45,10 +48,10 @@ Nothing in this directory is approved as the final deforming mesh yet.
 
 Replace the four temporary triangle caps with authored quad patches. Refine the
 current controlled weights for planted rear-paw contact, shoulder/hip weight
-shift, and a stronger tail arc. Integrate the eye sockets and closed-lid surface
-into the head mesh. Convert the current color blocking into the approved warm,
-painterly Marmalade coat and correct the terminal tail silhouette before
-animation acceptance.
+shift, and a stronger tail arc. Refine the new surface eyelids into the head
+silhouette and correct eye contour/spacing, whisker curvature, and facial
+warmth. Convert the current color blocking into the approved painterly coat and
+correct the terminal tail silhouette before animation acceptance.
 
 Current face inputs on `Marmalade_FaceRoot`:
 

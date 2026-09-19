@@ -91,3 +91,37 @@ the face still requires its separate eye/lid/muzzle assembly, the coat requires
 a painterly texture pass, the tail silhouette/tip must match the bible, and paw
 contact must be proven in a real walk/trot cycle. The four-state scope remains
 frozen; no additional states or birthday-site work were started.
+
+## 2026-09-19 — integrated face checkpoint v05
+
+### Face attachment and controls
+
+- Attached `Marmalade_FaceRoot` to `DEF_head` while preserving the neutral
+  assembly placement. The face root follows the corrective head-range pose.
+- Retained `lookX`, `lookY`, `blink`, and `focus` as the additive face inputs.
+- Brought the amber irises forward, increased their readable area, narrowed the
+  neutral pupils, and reduced intersection with the inherited Tripo sockets.
+- Hid the redundant separate muzzle/chin guide volumes because they doubled the
+  fused source snout and produced visible cheek lumps.
+
+### Eyelid replacement
+
+- Replaced the paired beveled lid curves with subdivided eyelid surfaces.
+- The upper surface expands over the full eye for closure; eye contents collapse
+  beneath it and the lower surface remains a thin supporting rim.
+- Neutral, half blink, full blink, and focused renders no longer show crossing
+  curves or the former two-color closed-lid seam.
+- Full closure is mechanically clean, but the large smooth lid cap still reads
+  more graphic than the approved painterly master and requires final art polish.
+
+### Evidence and status
+
+- `review/face-integration-v05/`: neutral, gaze extremes, half/full blink, and
+  focus PNGs.
+- `blender/marmalade-face-integrated-v05.blend`: current assembled face and
+  marked corrective body.
+
+**Checkpoint only.** The face mechanics are now usable for continued rig work,
+but likeness is not accepted: eye contour, eyelid-to-brow transition, whisker
+curvature, and painterly facial warmth still need refinement. No animation
+states or application files were added.
