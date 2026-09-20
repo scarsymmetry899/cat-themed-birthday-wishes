@@ -58,6 +58,9 @@ def main():
     root = bpy.data.objects.get("Marmalade_FaceRoot")
     if not body or not root:
         raise RuntimeError("Marked body or face root is missing")
+    # Validation values must not be overridden by the Looking Around action.
+    if root.animation_data:
+        root.animation_data.action = None
     allowed = {body.name}
     allowed.update(child.name for child in root.children_recursive if not child.name.startswith("PartyHat"))
     for obj in bpy.data.objects:

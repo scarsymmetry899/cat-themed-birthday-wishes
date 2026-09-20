@@ -82,6 +82,7 @@ def animation_action(owner, name):
             owner.animation_data.action = None
         bpy.data.actions.remove(old)
     action = bpy.data.actions.new(name)
+    action.use_fake_user = True
     owner.animation_data.action = action
     return action
 

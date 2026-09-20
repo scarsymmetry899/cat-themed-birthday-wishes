@@ -1,12 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Marmalade · Character lab</title><link rel="stylesheet" href="/character-lab/lab.css"><link rel="stylesheet" href="/character-lab/review.css"><script src="/character-lab/vendor/rive.js" defer></script><script src="/character-lab/lab.js" defer></script></head><body>
-<header>MARMALADE / CHARACTER LAB <span>FOUNDATION · 02</span></header><main><div class="title"><div><p class="eyebrow">A small character. A whole lot of personality.</p><h1>Meet Marmalade.</h1></div><p>Four motions, one curious kitten.<br>Explore the rig before the story begins.</p></div>
-<div class="workbench"><section class="viewer"><div class="stage-label"><b id="state-label">Idle / breathing</b><span id="status" role="status">Loading Rive…</span></div><div id="stage" class="stage"><canvas id="character" aria-label="Animated Marmalade orange tabby kitten"></canvas><div id="ledge" aria-hidden="true"></div><svg id="debug-overlay" viewBox="0 0 300 370" aria-hidden="true"><g fill="none" stroke="#2E8C87" stroke-width=".6"><path d="M163 35V340 M30 147H270 M60 243H250 M40 323H250"/><circle cx="163" cy="147" r="5"/><circle cx="140" cy="243" r="5"/><circle cx="186" cy="243" r="5"/><circle cx="100" cy="278" r="5"/></g></svg></div><div class="viewer-foot"><span>Native Rive · continuous vector rig</span><button id="pause">Pause</button><button id="mobile">Phone frame</button></div></section>
-<aside><section><h2>Body action</h2><div class="states"><button data-state="0" class="selected">Idle</button><button data-state="1">Peeking</button><button data-state="2">Looking around</button><button data-state="3">Walk / trot</button></div></section><section><h2>Motion & gaze</h2><label>Walk → trot <output id="speed-value">0%</output><input id="speed" type="range" min="0" max="100" value="0"></label><label>Peek progress <output id="peek-value">100%</output><input id="peek" type="range" min="0" max="100" value="100"></label><label>lookX <output id="x-value">0.00</output><input id="look-x" type="range" min="-1" max="1" step=".01" value="0"></label><label>lookY <output id="y-value">0.00</output><input id="look-y" type="range" min="-1" max="1" step=".01" value="0"></label><label class="check"><input id="track" type="checkbox"> Follow pointer</label></section>
-<section><h2>Expression & details</h2><label>Expression<select id="expression"><option value="0">Gentle / neutral</option><option value="1">Determined / focused</option><option value="2">Playfully mischievous</option></select></label><div class="checks"><label class="check"><input id="hat" type="checkbox"> Party hat</label><label class="check"><input id="blink" type="checkbox" checked> Blink</label><label class="check"><input id="debug" type="checkbox"> Rig guides</label></div></section>
-<section><h2>Transition tests</h2><div class="tests"><button id="peek-test">Hidden → peek → look</button><button id="walk-test">Idle → walk → idle</button><button id="reverse-test">Peek forward ↔ reverse</button><button id="gaze-left">Gaze left</button><button id="gaze-right">Gaze right</button><button id="reset">Reset</button></div><p id="test-status" aria-live="polite">Ready to inspect.</p></section></aside></div>
-<details open class="fidelity"><summary>Fidelity & motion review</summary><div class="review-controls">
-<section><h2>Master alignment</h2><label class="check"><input id="reference" type="checkbox"> Reference overlay</label><label>Reference opacity <output id="reference-value">50%</output><input id="reference-opacity" type="range" min="0" max="100" value="50"></label><label class="check"><input id="silhouette" type="checkbox"> Silhouette only</label><label class="check"><input id="markings" type="checkbox" checked> Show markings</label><label class="check"><input id="landmarks" type="checkbox"> Alignment landmarks</label></section>
-<section><h2>Playback</h2><label>Animation speed <output id="rate-value">1×</output><input id="rate" type="range" min=".25" max="2" step=".05" value="1"></label><div class="tests"><button id="step">Step 1/60 s</button><button id="restart">Restart clocks</button><button id="blink-pose">Blink midpoint</button></div><label>Preview raster scale<select id="render-scale"><option value="1">Native DPR</option><option value="2">2× backing resolution (not device emulation)</option></select></label></section>
-<section><h2>Contact diagnostics</h2><label class="check"><input id="contacts" type="checkbox"> Floor & paw contacts</label><label class="check"><input id="trails" type="checkbox"> Paw trails</label><p class="note">Guides use live native node transforms. Green = near-floor, stationary paw. Rear paws may be occluded by the frontal pose.</p></section>
-</div></details>
-<details open class="readout"><summary>Live rig inputs</summary><pre id="readout">Waiting for native runtime…</pre></details><details class="comparison"><summary>Compare production neutral with Marmalade V1</summary><div><figure><svg viewBox="0 0 300 370" role="img" aria-label="Original Marmalade V1"><image href="/assets/character/marmalade-master-sheet-v1.png" width="1536" height="1024"/></svg><figcaption>Approved painted direction</figcaption></figure><figure><img src="/assets/character/production/marmalade-assembled.svg" alt="Production neutral redraw"><figcaption>Riggable vector redraw</figcaption></figure></div><p>Fur edges and shading are simplified for animation. The painted master remains unchanged.</p></details><footer>Foundation only · No birthday scenes or additional body animations.</footer></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Marmalade · Blender Character Lab</title>
+  <link rel="stylesheet" href="/character-lab/blender-lab.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
+  <script src="/character-lab/blender-lab.js" defer></script>
+</head>
+<body>
+  <header><span>MARMALADE / BLENDER CHARACTER LAB</span><b>FOUR-STATE FOUNDATION · PREVIEW</b></header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">The actual Blender character</p><h1>Meet Marmalade<br>in 3D.</h1></div>
+      <p>Orbit, zoom and play the authored foundation clips. This is the exported production checkpoint—not a replacement drawing.</p>
+    </section>
+    <div class="workbench">
+      <section class="viewer">
+        <div class="viewer-head"><b id="state-label">Idle / breathing</b><span id="load-status" role="status">Loading 3D asset…</span></div>
+        <model-viewer id="marmalade-3d" src="/assets/character/3d/web/marmalade-foundation-preview-v13.glb" alt="Rigged 3D Marmalade orange tabby kitten" camera-controls touch-action="pan-y" interaction-prompt="auto" shadow-intensity="1.25" shadow-softness=".8" exposure="1.05" environment-image="neutral" tone-mapping="aces" camera-orbit="35deg 75deg auto" field-of-view="28deg" autoplay animation-name="Marmalade_IdleBreathing_v01">
+          <div class="progress" slot="progress-bar"><i id="progress-bar"></i></div>
+          <button class="hotspot" slot="hotspot-face" data-position="-.42m -.1m .76m" data-normal="-1m 0m 0m">Face rig</button>
+        </model-viewer>
+        <div class="viewer-foot"><span>GLB · 1.65 MB · drag to orbit · pinch/scroll to zoom</span><div><button id="front-view">Front</button><button id="three-view">3/4</button><button id="side-view">Side</button></div></div>
+      </section>
+      <aside>
+        <section><h2>Foundation state</h2><div class="states"><button data-state="idle" class="selected">Idle / breathing</button><button data-state="peek">Peeking</button><button data-state="look">Looking around</button><button data-state="walk">Walking</button><button data-state="trot">Trotting</button></div></section>
+        <section><h2>Playback</h2><label>Speed <output id="speed-value">1.00×</output><input id="speed" type="range" min=".25" max="1.75" value="1" step=".05"></label><div class="row"><button id="pause">Pause</button><button id="restart">Restart</button></div><button id="reverse-peek" class="wide">Peek forward ↔ reverse</button></section>
+        <section><h2>Viewport</h2><div class="row"><button id="phone">Phone frame</button><button id="auto-rotate">Auto rotate</button></div><label>Exposure <output id="exposure-value">1.05</output><input id="exposure" type="range" min=".5" max="1.8" value="1.05" step=".05"></label></section>
+        <section class="readout"><h2>Runtime</h2><pre id="readout">Waiting for model metadata…</pre></section>
+      </aside>
+    </div>
+    <section class="checkpoint">
+      <div><p class="eyebrow">Honest checkpoint</p><h2>What remains visible</h2></div>
+      <p>The exported character includes the real face, rig, markings and five animation clips that implement the four-state scope. Final painted-master likeness and the local front-paw topology are still under refinement; this preview is for judging the actual result, not declaring it accepted.</p>
+      <a href="/character-lab/3d-review/">Open rendered QA frames →</a>
+    </section>
+  </main>
+</body>
+</html>

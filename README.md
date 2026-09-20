@@ -28,6 +28,8 @@ Run `node tools/serve-lab.mjs`, then open `http://127.0.0.1:8137/character-lab/`
 
 Current artboard and machine: `Marmalade_Main`. Body states: `Idle`, `Peeking`, `Looking`, `Walking`. Inputs: `state`, `scrollProgress`, `lookX`, `lookY`, `moveSpeed`, `expression`, `blinkEnabled`, `hasHat`. Exact ranges and the nine-layer contract are in [rig-spec](docs/rig-spec.md). Only four body states exist; the 22 timelines include additive channels, blend endpoints and expressions.
 
+The review route `/character-lab/` now exposes the Blender production checkpoint as an interactive GLB. It contains five clips implementing the same four-state scope: `Marmalade_IdleBreathing_v01`, `Marmalade_Peeking_v01`, `Marmalade_LookingAround_v01`, `Marmalade_WalkContact_Body_v01`, and `Marmalade_TrotContact_Body_v01`. The previous Rive runtime/source remains in the repository; no birthday-site route was changed.
+
 The pinned browser runtime is vendored for offline review. To refresh it: `npm ci --ignore-scripts`, then `npm run vendor`. After compiling source, copy `rive-foundation/build/rive-foundation.riv` to `assets/character/production/marmalade-foundation.riv`. Run `npm run lab` and open `/character-lab/` on port 8137. The `.rml` is editable native source; no authenticated cloud `.rev` backup is included.
 
 The repository also contains a legacy static V3 prototype (`index.html`, `styles.css`, `app.js`). It remains deployable for reference, but its hand-built SVG cat is not the approved final production asset.

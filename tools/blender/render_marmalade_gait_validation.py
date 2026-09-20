@@ -65,6 +65,7 @@ def main():
     face_root = bpy.data.objects["Marmalade_FaceRoot"]
     rig = bpy.data.objects["Marmalade_ProductionRig_v01"]
     allowed = {body.name}
+    allowed.update(obj.name for obj in bpy.data.objects if obj.name.startswith("Marmalade_PawShell_"))
     allowed.update(child.name for child in face_root.children_recursive if not child.name.startswith("PartyHat"))
     for obj in bpy.data.objects:
         if obj.type in {"MESH", "CURVE"}:

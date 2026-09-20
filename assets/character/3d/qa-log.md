@@ -171,3 +171,22 @@ states or application files were added.
 and largely controlled, but the front-paw topology must be rebuilt or locally
 retopologized before a polished walk/trot can be accepted. No additional states
 and no birthday-site implementation were started.
+
+## 2026-09-20 — Blender web preview v13
+
+- Exported a 1,647,240-byte GLB containing five clips for the frozen four-state
+  scope: Idle/Breathing, Peeking, Looking Around, Walk, and Trot.
+- Omitted the experimental paw-overlay shells after visual QA showed detached
+  shapes; the preview therefore exposes the real remaining source-paw issue.
+- Replaced the `/character-lab/` viewport with the actual GLB model and added
+  orbit/zoom, state, playback-speed, camera, reverse-peek, exposure, and phone
+  controls.
+- Local browser verification loaded the GLB successfully and reported all five
+  animation names. Idle, Peeking, Walk, and Trot switching worked with no
+  page-origin console errors.
+- Responsive checks: narrow in-app phone viewport and an Edge desktop/tablet
+  viewport both loaded the model. No additional animations or birthday scenes
+  were added.
+
+**Still not foundation-approved.** Painterly-master likeness and local
+front-paw topology remain unresolved and are stated on the public preview.

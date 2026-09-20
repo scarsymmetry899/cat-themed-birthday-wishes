@@ -37,6 +37,11 @@ Nothing in this directory is approved as the final deforming mesh yet.
 - `blender/marmalade-contact-gaits-v11.blend` — current walk/trot contact proof
   with two-bone ankle IK, world-oriented paws, rigid paw-weight islands, and
   measured stance drift. It remains a diagnostic gait checkpoint.
+- `blender/marmalade-foundation-v12.blend` — scoped four-state Blender
+  checkpoint with Idle/Breathing, Peeking, Looking Around, Walk, and Trot
+  actions plus the integrated face controls.
+- `web/marmalade-foundation-preview-v13.glb` — browser export used by
+  `/character-lab/`. The rejected experimental paw-overlay shells are omitted.
 
 ## Verified source limitations
 
@@ -70,3 +75,7 @@ chin, nose, mouth, whiskers, and party-hat objects are separate.
 
 Only the four foundation states remain in scope: Idle/Breathing, Peeking,
 Looking Around, and Walking/Trotting.
+
+The interactive GLB preview is intentionally labelled as a checkpoint. It is
+not foundation acceptance: final painted-master likeness and the local
+front-paw topology remain open.
