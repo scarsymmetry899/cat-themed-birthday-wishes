@@ -216,3 +216,30 @@ Open limitation: Tripo's eyes, muzzle and lids are fused/painted into the mesh,
 so independent pupil tracking and a clean geometric blink are not present in
 this recovery GLB. This checkpoint prioritizes the user's approved Tripo
 likeness and stable body motion; it does not claim a production facial rig.
+
+## 2026-09-21 — Browser-driven motion correction v09
+
+- Reproduced the reported failure on the public preview: state labels changed,
+  but Looking was nearly indistinguishable from Idle, Walking visibly moved
+  only one rear leg, and Peeking looped back instead of holding its reveal.
+- Replaced envelope-plus-pelvis fallback skinning with complete deterministic
+  guide weights. This removes the 9,029-vertex fallback and gives the fused
+  mesh valid body, limb, ear, and tail influences while keeping the painted
+  facial mass rigid.
+- Increased readable breathing, gaze turn, gait counter-rotation, paw flex,
+  weight shift, tail counterbalance, and the hidden-to-reveal peek path. The
+  action names and four-state scope remain unchanged.
+- Fixed the lab's view labels for the Tripo asset's baked orientation and made
+  the useful three-quarter view the default. The old default view placed the
+  body behind the oversized head and concealed much of the gait.
+- Peeking now plays once and holds. Reverse peeking uses deterministic
+  frame-by-frame reverse playback instead of an unsupported `pingpong` option.
+- Browser QA on the local `/character-lab/` visually inspected multiple live
+  frames from Idle, Peeking, Looking Around, Walking, and reverse Peeking. All
+  four states now produce clearly different on-screen poses.
+
+Open limitation: the Tripo retopology was generated from a three-quarter posed
+image, so its far-side legs are fused/occluded rather than a clean symmetric
+quadruped rest pose. v09 makes the available gait visibly articulated and
+stable, but it cannot create truly independent hidden-side paw contacts without
+a fresh neutral-pose retopology.

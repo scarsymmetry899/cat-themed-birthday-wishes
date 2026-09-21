@@ -17,8 +17,13 @@ mesh.select_set(True)
 mesh.rotation_euler = (0.0, math.radians(-90.0), 0.0)
 # Its generated origin is also displaced from the visual volume. These measured
 # offsets put the paw plane at Z=0 and center the head-to-tail span on the guide.
-mesh.location = (0.092586, 0.470360, 0.487915)
+mesh.location = (0.0, 0.470360, 0.487915)
 bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+coordinate_bounds = tuple(
+    (min(vertex.co[axis] for vertex in mesh.data.vertices), max(vertex.co[axis] for vertex in mesh.data.vertices))
+    for axis in range(3)
+)
+print(f"MESH_COORDINATE_BOUNDS={coordinate_bounds}")
 
 armature_data = bpy.data.armatures.new("Marmalade_TripoRig_Armature")
 armature = bpy.data.objects.new("Marmalade_TripoRig", armature_data)
@@ -85,55 +90,93 @@ for index in range(len(tail_points) - 1):
 
 bpy.ops.object.mode_set(mode="OBJECT")
 
-# Bind the preserved Tripo mesh to the new deform skeleton.
-bpy.ops.object.select_all(action="DESELECT")
-mesh.select_set(True)
-armature.select_set(True)
-bpy.context.view_layer.objects.active = armature
-bpy.ops.object.parent_set(type="ARMATURE_AUTO")
+# The Tripo retopology is one fused fur shell. Blender's automatic heat solver
+# rejects it and envelope binding previously left ~45% of the mesh on a pelvis
+# fallback, which is why only one rear leg visibly moved in the browser. Build
+# complete, deterministic weights from the authored guide instead. Every
+# vertex receives a valid influence and every limb chain receives geometry.
+mesh.parent = armature
+mesh.matrix_parent_inverse = armature.matrix_world.inverted()
+mesh.vertex_groups.clear()
+for modifier in list(mesh.modifiers):
+    if modifier.type == "ARMATURE":
+        mesh.modifiers.remove(modifier)
+armature_modifier = mesh.modifiers.new(name="Marmalade Tripo Rig", type="ARMATURE")
+armature_modifier.object = armature
+armature_modifier.use_deform_preserve_volume = True
 
-armature_modifiers = [modifier for modifier in mesh.modifiers if modifier.type == "ARMATURE"]
-weighted_memberships = sum(len(vertex.groups) for vertex in mesh.data.vertices)
-if not armature_modifiers or weighted_memberships == 0:
-    mesh.parent = None
-    mesh.vertex_groups.clear()
-    for modifier in list(mesh.modifiers):
-        if modifier.type == "ARMATURE":
-            mesh.modifiers.remove(modifier)
-    bpy.ops.object.select_all(action="DESELECT")
-    mesh.select_set(True)
-    armature.select_set(True)
-    bpy.context.view_layer.objects.active = armature
-    bpy.ops.object.parent_set(type="ARMATURE_ENVELOPE")
+deform_bones = {bone.name: bone for bone in armature.data.bones if bone.use_deform}
+groups = {name: mesh.vertex_groups.new(name=name) for name in deform_bones}
 
-# Envelope binding can leave isolated fur-shell vertices without any group.
-# Those vertices visibly stay behind during whole-character moves (notably the
-# peek). Give only the genuinely unweighted remainder a pelvis fallback; the
-# authored limb/head/tail envelope weights remain untouched.
-pelvis_group = mesh.vertex_groups.get("pelvis") or mesh.vertex_groups.new(name="pelvis")
-unweighted_vertices = [
-    vertex.index
-    for vertex in mesh.data.vertices
-    if not any(group.weight > 1e-6 for group in vertex.groups)
-]
-if unweighted_vertices:
-    pelvis_group.add(unweighted_vertices, 1.0, "REPLACE")
-print(f"UNWEIGHTED_FALLBACK={len(unweighted_vertices)}")
 
-# The Tripo face is a fused, pre-painted volume rather than separable eyes and
-# lids. Mixed heat weights visibly shear the eyes/muzzle when the head turns.
-# Keep the whole facial mass rigid on the head bone so identity is preserved.
-head_vertices = [
-    vertex.index
-    for vertex in mesh.data.vertices
-    if (vertex.co.y < -0.34 and vertex.co.z > 0.34)
-    or (vertex.co.y < -0.20 and vertex.co.z > 0.58)
-]
-for group in mesh.vertex_groups:
-    group.remove(head_vertices)
-head_group = mesh.vertex_groups.get("head") or mesh.vertex_groups.new(name="head")
-head_group.add(head_vertices, 1.0, "REPLACE")
-print(f"RIGID_HEAD_VERTICES={len(head_vertices)}")
+def segment_distance(point, bone_name):
+    bone = deform_bones[bone_name]
+    start = bone.head_local
+    end = bone.tail_local
+    span = end - start
+    amount = max(0.0, min(1.0, (point - start).dot(span) / max(span.length_squared, 1e-8)))
+    return (point - (start + span * amount)).length
+
+
+def assign_nearest(vertex, candidates, maximum=2, power=2.6):
+    ranked = sorted((segment_distance(vertex.co, name), name) for name in candidates)[:maximum]
+    weighted = [(1.0 / ((distance + 0.025) ** power), name) for distance, name in ranked]
+    total = sum(weight for weight, _ in weighted)
+    for weight, name in weighted:
+        groups[name].add([vertex.index], weight / total, "REPLACE")
+
+
+torso_chain = ("pelvis", "spine", "chest", "neck", "head")
+tail_chain = tuple(f"tail.{index:02d}" for index in range(1, 6))
+rigid_head_vertices = 0
+for vertex in mesh.data.vertices:
+    point = vertex.co
+    # Preserve the painted eyes, muzzle and forehead as a single facial mass.
+    if (point.y < -0.34 and point.z > 0.34) or (point.y < -0.20 and point.z > 0.60):
+        groups["head"].add([vertex.index], 1.0, "REPLACE")
+        rigid_head_vertices += 1
+        continue
+
+    # Ear tips can twitch without pulling the neighbouring eye surface.
+    if point.y < -0.18 and point.z > 0.79 and abs(point.x) > 0.07:
+        ear = "ear.L" if point.x >= 0 else "ear.R"
+        assign_nearest(vertex, ("head", ear), maximum=2, power=3.2)
+        continue
+
+    # The raised tail is spatially distinct from the rump above this boundary.
+    if point.y > 0.285 and point.z > 0.50:
+        assign_nearest(vertex, tail_chain + ("pelvis",), maximum=2, power=3.0)
+        continue
+
+    # Split the four leg volumes by side and fore/aft position. Include the
+    # relevant body anchor only at the shoulder/hip for a smooth fused-shell
+    # transition; lower legs and paws remain strongly articulated.
+    if point.z < 0.59 and abs(point.x) > 0.045:
+        side = "L" if point.x >= 0 else "R"
+        region = "front" if point.y < -0.035 else "rear"
+        anchor = "chest" if region == "front" else "pelvis"
+        limb = tuple(f"{region}_{part}.{side}" for part in ("upper", "lower", "paw"))
+        if point.z < 0.19:
+            candidates = (limb[2], limb[1])
+        elif point.z < 0.37:
+            candidates = (limb[1], limb[0])
+        else:
+            candidates = (limb[0], anchor)
+        assign_nearest(vertex, candidates, maximum=2, power=3.1)
+        continue
+
+    assign_nearest(vertex, torso_chain, maximum=2, power=2.8)
+
+group_counts = {
+    group.name: sum(
+        1
+        for vertex in mesh.data.vertices
+        if any(item.group == group.index and item.weight > 0.01 for item in vertex.groups)
+    )
+    for group in mesh.vertex_groups
+}
+print(f"RIGID_HEAD_VERTICES={rigid_head_vertices}")
+print("WEIGHT_GROUP_COUNTS=" + ",".join(f"{name}:{count}" for name, count in group_counts.items()))
 
 
 def reset_pose():
@@ -174,9 +217,9 @@ def new_action(name, end_frame):
 new_action("Marmalade_IdleBreathing_Tripo", 120)
 for frame, lift, chest_pitch, head_pitch, tail in (
     (1, 0.000, 0.000, 0.000, 0.00),
-    (30, 0.008, -0.025, 0.012, 0.08),
+    (30, 0.014, -0.040, 0.018, 0.11),
     (60, 0.000, 0.000, 0.000, 0.00),
-    (90, 0.008, -0.025, 0.012, -0.08),
+    (90, 0.014, -0.040, 0.018, -0.11),
     (120, 0.000, 0.000, 0.000, 0.00),
 ):
     key_pose(frame, {
@@ -188,11 +231,17 @@ for frame, lift, chest_pitch, head_pitch, tail in (
         "tail.03": {"rotation": (0, tail * 0.45, 0)},
     })
 
-new_action("Marmalade_Peeking_Tripo", 80)
-for frame, z, pitch in ((1, -0.52, 0.12), (18, -0.38, 0.08), (38, -0.08, -0.04), (52, 0.0, 0.0), (80, 0.0, 0.0)):
+new_action("Marmalade_Peeking_Tripo", 72)
+for frame, x, z, pitch, roll in (
+    (1, -0.54, -0.34, 0.10, -0.08),
+    (12, -0.46, -0.28, 0.08, -0.07),
+    (28, -0.18, -0.08, -0.06, 0.04),
+    (42, 0.02, 0.00, -0.02, 0.02),
+    (72, 0.02, 0.00, 0.00, 0.00),
+):
     key_pose(frame, {
-        "root": {"location": (0, 0, z)},
-        "head": {"rotation": (pitch, 0, 0)},
+        "root": {"location": (x, 0, z), "rotation": (0, 0, roll)},
+        "head": {"rotation": (pitch, 0, -roll * 0.4)},
         "ear.L": {"rotation": (0, 0.05, 0)},
         "ear.R": {"rotation": (0, -0.05, 0)},
     })
@@ -202,34 +251,43 @@ for frame, yaw, pitch in ((1, 0.0, 0.0), (25, 0.32, 0.02), (50, 0.32, 0.02), (75
     key_pose(frame, {
         # The fused Tripo face cannot safely take differential facial weights.
         # Turn the full hierarchy as one solid character for this checkpoint.
-        "root": {"rotation": (0, yaw * 0.38, 0)},
-        "tail.01": {"rotation": (0, -yaw * 0.18, 0)},
+        "root": {"rotation": (0, yaw * 0.90, 0)},
+        "head": {"rotation": (pitch, yaw * 0.16, 0)},
+        "ear.L": {"rotation": (0, yaw * 0.09, 0)},
+        "ear.R": {"rotation": (0, -yaw * 0.09, 0)},
+        "tail.01": {"rotation": (0, -yaw * 0.34, 0)},
+        "tail.02": {"rotation": (0, -yaw * 0.18, 0)},
     })
 
 new_action("Marmalade_Walking_Tripo", 32)
 walk_frames = (
-    (1, 0.0, 0.34),
-    (9, 0.010, 0.0),
-    (17, 0.0, -0.34),
-    (25, 0.010, 0.0),
-    (32, 0.0, 0.34),
+    (1, 0.000, 0.50),
+    (9, 0.020, 0.0),
+    (17, 0.000, -0.50),
+    (25, 0.020, 0.0),
+    (32, 0.000, 0.50),
 )
 for frame, lift, swing in walk_frames:
     key_pose(frame, {
         "root": {"location": (0, 0, lift)},
-        "pelvis": {"rotation": (0, -swing * 0.08, 0)},
-        "chest": {"rotation": (0, swing * 0.07, 0)},
-        "head": {"rotation": (-abs(swing) * 0.025, -swing * 0.025, 0)},
+        "pelvis": {"rotation": (0, -swing * 0.15, swing * 0.04)},
+        "chest": {"rotation": (0, swing * 0.13, -swing * 0.03)},
+        "head": {"rotation": (-abs(swing) * 0.035, -swing * 0.045, 0)},
         "front_upper.L": {"rotation": (swing, 0, 0)},
-        "front_lower.L": {"rotation": (-max(swing, 0) * 0.50, 0, 0)},
+        "front_lower.L": {"rotation": (-max(swing, 0) * 0.72, 0, 0)},
+        "front_paw.L": {"rotation": (max(swing, 0) * 0.22, 0, 0)},
         "front_upper.R": {"rotation": (-swing, 0, 0)},
-        "front_lower.R": {"rotation": (min(swing, 0) * 0.50, 0, 0)},
+        "front_lower.R": {"rotation": (min(swing, 0) * 0.72, 0, 0)},
+        "front_paw.R": {"rotation": (-min(swing, 0) * 0.22, 0, 0)},
         "rear_upper.L": {"rotation": (-swing, 0, 0)},
-        "rear_lower.L": {"rotation": (min(swing, 0) * 0.58, 0, 0)},
+        "rear_lower.L": {"rotation": (min(swing, 0) * 0.78, 0, 0)},
+        "rear_paw.L": {"rotation": (-min(swing, 0) * 0.26, 0, 0)},
         "rear_upper.R": {"rotation": (swing, 0, 0)},
-        "rear_lower.R": {"rotation": (-max(swing, 0) * 0.58, 0, 0)},
-        "tail.01": {"rotation": (0, -swing * 0.25, 0)},
-        "tail.02": {"rotation": (0, -swing * 0.18, 0)},
+        "rear_lower.R": {"rotation": (-max(swing, 0) * 0.78, 0, 0)},
+        "rear_paw.R": {"rotation": (max(swing, 0) * 0.26, 0, 0)},
+        "tail.01": {"rotation": (0, -swing * 0.34, 0)},
+        "tail.02": {"rotation": (0, -swing * 0.24, 0)},
+        "tail.03": {"rotation": (0, -swing * 0.14, 0)},
     })
 
 # Preserve all actions for glTF export and leave Idle active in Blender.

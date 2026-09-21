@@ -49,9 +49,10 @@ true separate eyelid/gaze facial rig.
   source used for the likeness recovery.
 - `blender/marmalade-tripo-recovery-v01.blend` — clean, texture-preserving
   Tripo source with the downloaded unusable skin removed.
-- `blender/marmalade-tripo-foundation-v08.blend` — corrected-axis 26-joint
-  Blender recovery rig with the frozen four-state action set.
-- `web/marmalade-tripo-foundation-v08.glb` — current `/character-lab/` export.
+- `blender/marmalade-tripo-foundation-v09.blend` — corrected-axis 26-joint
+  Blender recovery rig with complete deterministic skin weights and the frozen
+  four-state action set.
+- `web/marmalade-tripo-foundation-v09.glb` — current `/character-lab/` export.
   It contains Idle/Breathing, Peeking, Looking Around, and Walking.
 
 ## Verified source limitations
