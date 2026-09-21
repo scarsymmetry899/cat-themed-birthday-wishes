@@ -1,7 +1,10 @@
 # Marmalade 3D production assets
 
-Status: **corrective-bind / marking-blockout checkpoint**.
-Nothing in this directory is approved as the final deforming mesh yet.
+Status: **Tripo-likeness recovery / four-state Blender checkpoint**.
+The browser lab now uses the preserved 20K Tripo mesh and texture instead of
+the rejected replacement geometry. The recovered skin is suitable for this
+interactive checkpoint, but the fused source eyes and muzzle still prevent a
+true separate eyelid/gaze facial rig.
 
 ## Source files
 
@@ -41,7 +44,15 @@ Nothing in this directory is approved as the final deforming mesh yet.
   checkpoint with Idle/Breathing, Peeking, Looking Around, Walk, and Trot
   actions plus the integrated face controls.
 - `web/marmalade-foundation-preview-v13.glb` — browser export used by
-  `/character-lab/`. The rejected experimental paw-overlay shells are omitted.
+  the earlier corrective-mesh checkpoint.
+- `source/marmalade-tripo-retopo20k-v01.glb` — untouched 20K Tripo retopology
+  source used for the likeness recovery.
+- `blender/marmalade-tripo-recovery-v01.blend` — clean, texture-preserving
+  Tripo source with the downloaded unusable skin removed.
+- `blender/marmalade-tripo-foundation-v08.blend` — corrected-axis 26-joint
+  Blender recovery rig with the frozen four-state action set.
+- `web/marmalade-tripo-foundation-v08.glb` — current `/character-lab/` export.
+  It contains Idle/Breathing, Peeking, Looking Around, and Walking.
 
 ## Verified source limitations
 

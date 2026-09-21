@@ -3,37 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Marmalade · Blender Character Lab</title>
+  <title>Marmalade · Tripo + Blender Character Lab</title>
   <link rel="stylesheet" href="/character-lab/blender-lab.css">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
   <script src="/character-lab/blender-lab.js" defer></script>
 </head>
 <body>
-  <header><span>MARMALADE / BLENDER CHARACTER LAB</span><b>FOUR-STATE FOUNDATION · PREVIEW</b></header>
+  <header><span>MARMALADE / TRIPO + BLENDER CHARACTER LAB</span><b>FOUR-STATE FOUNDATION · RECOVERY PREVIEW</b></header>
   <main>
     <section class="intro">
-      <div><p class="eyebrow">The actual Blender character</p><h1>Meet Marmalade<br>in 3D.</h1></div>
-      <p>Orbit, zoom and play the authored foundation clips. This is the exported production checkpoint—not a replacement drawing.</p>
+      <div><p class="eyebrow">The preserved Tripo character</p><h1>Meet Marmalade<br>in 3D.</h1></div>
+      <p>The original Tripo mesh and textures are now driven by a clean Blender quadruped rig. Orbit, zoom and compare all four embedded clips.</p>
     </section>
     <div class="workbench">
       <section class="viewer">
         <div class="viewer-head"><b id="state-label">Idle / breathing</b><span id="load-status" role="status">Loading 3D asset…</span></div>
-        <model-viewer id="marmalade-3d" src="/assets/character/3d/web/marmalade-foundation-preview-v13.glb" alt="Rigged 3D Marmalade orange tabby kitten" camera-controls touch-action="pan-y" interaction-prompt="auto" shadow-intensity="1.25" shadow-softness=".8" exposure="1.05" environment-image="neutral" tone-mapping="aces" camera-orbit="35deg 75deg auto" field-of-view="28deg" autoplay animation-name="Marmalade_IdleBreathing_v01">
+        <model-viewer id="marmalade-3d" src="/assets/character/3d/web/marmalade-tripo-foundation-v08.glb" orientation="0deg -90deg 180deg" alt="Rigged 3D Marmalade orange tabby kitten" camera-controls touch-action="pan-y" interaction-prompt="auto" shadow-intensity="1.25" shadow-softness=".8" exposure="1.05" environment-image="neutral" tone-mapping="aces" camera-orbit="35deg 75deg auto" field-of-view="28deg" autoplay animation-name="Marmalade_IdleBreathing_Tripo">
           <div class="progress" slot="progress-bar"><i id="progress-bar"></i></div>
           <button class="hotspot" slot="hotspot-face" data-position="-.42m -.1m .76m" data-normal="-1m 0m 0m">Face rig</button>
         </model-viewer>
-        <div class="viewer-foot"><span>GLB · 1.65 MB · drag to orbit · pinch/scroll to zoom</span><div><button id="front-view">Front</button><button id="three-view">3/4</button><button id="side-view">Side</button></div></div>
+        <div class="viewer-foot"><span>GLB · 9.2 MB · Tripo 20K mesh · 26-joint Blender rig</span><div><button id="front-view">Front</button><button id="three-view">3/4</button><button id="side-view">Side</button></div></div>
       </section>
       <aside>
-        <section><h2>Foundation state</h2><div class="states"><button data-state="idle" class="selected">Idle / breathing</button><button data-state="peek">Peeking</button><button data-state="look">Looking around</button><button data-state="walk">Walking</button><button data-state="trot">Trotting</button></div></section>
+        <section><h2>Foundation state</h2><div class="states"><button data-state="idle" class="selected">Idle / breathing</button><button data-state="peek">Peeking</button><button data-state="look">Looking around</button><button data-state="walk">Walking</button></div></section>
         <section><h2>Playback</h2><label>Speed <output id="speed-value">1.00×</output><input id="speed" type="range" min=".25" max="1.75" value="1" step=".05"></label><div class="row"><button id="pause">Pause</button><button id="restart">Restart</button></div><button id="reverse-peek" class="wide">Peek forward ↔ reverse</button></section>
         <section><h2>Viewport</h2><div class="row"><button id="phone">Phone frame</button><button id="auto-rotate">Auto rotate</button></div><label>Exposure <output id="exposure-value">1.05</output><input id="exposure" type="range" min=".5" max="1.8" value="1.05" step=".05"></label></section>
         <section class="readout"><h2>Runtime</h2><pre id="readout">Waiting for model metadata…</pre></section>
       </aside>
     </div>
     <section class="checkpoint">
-      <div><p class="eyebrow">Honest checkpoint</p><h2>What remains visible</h2></div>
-      <p>The exported character includes the real face, rig, markings and five animation clips that implement the four-state scope. Final painted-master likeness and the local front-paw topology are still under refinement; this preview is for judging the actual result, not declaring it accepted.</p>
+      <div><p class="eyebrow">Recovery checkpoint</p><h2>What changed</h2></div>
+      <p>The broken replacement geometry is gone. This build keeps Tripo's face, proportions, markings, paws and tail, and replaces only the unusable downloaded skeleton with a real Blender skin and four animation clips.</p>
       <a href="/character-lab/3d-review/">Open rendered QA frames →</a>
     </section>
   </main>

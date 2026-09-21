@@ -190,3 +190,29 @@ and no birthday-site implementation were started.
 
 **Still not foundation-approved.** Painterly-master likeness and local
 front-paw topology remain unresolved and are stated on the public preview.
+
+## 2026-09-21 — Tripo likeness recovery v08
+
+- Replaced the visibly broken replacement cat in `/character-lab/` with the
+  preserved 19,105-face Tripo retopology and its original 4K/2K PBR textures.
+- Confirmed Tripo's exported geometry is Y-up and applied the required -90° Y
+  conversion before Blender rig construction; the web viewer uses the matching
+  whole-model orientation for an upright three-quarter presentation.
+- Built and exported one 26-joint Blender skin with exactly four actions:
+  `Marmalade_IdleBreathing_Tripo`, `Marmalade_Peeking_Tripo`,
+  `Marmalade_LookingAround_Tripo`, and `Marmalade_Walking_Tripo`.
+- Blender automatic heat weights failed on the fused fur shell. After measured
+  origin correction, envelope binding left 9,029 vertices unweighted; v08 assigns only that unweighted
+  remainder to the pelvis fallback, removing the severe peek stretching while
+  retaining authored limb/head/tail envelope influences. The 3,900-vertex
+  facial volume is kept rigid to protect the baked Tripo identity, and the
+  look-around clip turns the full hierarchy rather than shearing that face.
+- Browser motion inspection covered all four actions and reverse peeking. The
+  model loaded at narrow phone-like width and a 1528×900 Edge desktop viewport.
+  The walk visibly alternates the front contacts without the earlier exploded
+  geometry, and reverse peeking returns to the neutral assembly.
+
+Open limitation: Tripo's eyes, muzzle and lids are fused/painted into the mesh,
+so independent pupil tracking and a clean geometric blink are not present in
+this recovery GLB. This checkpoint prioritizes the user's approved Tripo
+likeness and stable body motion; it does not claim a production facial rig.

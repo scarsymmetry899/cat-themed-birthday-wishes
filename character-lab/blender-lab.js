@@ -1,6 +1,6 @@
 const $=s=>document.querySelector(s);
 const viewer=$('#marmalade-3d');
-const clips={idle:['Idle / breathing','Marmalade_IdleBreathing_v01'],peek:['Peeking','Marmalade_Peeking_v01'],look:['Looking around','Marmalade_LookingAround_v01'],walk:['Walking','Marmalade_WalkContact_Body_v01'],trot:['Trotting','Marmalade_TrotContact_Body_v01']};
+const clips={idle:['Idle / breathing','Marmalade_IdleBreathing_Tripo'],peek:['Peeking','Marmalade_Peeking_Tripo'],look:['Looking around','Marmalade_LookingAround_Tripo'],walk:['Walking','Marmalade_Walking_Tripo']};
 let current='idle',paused=false,rotating=false;
 function readout(){const animations=viewer.availableAnimations||[];$('#readout').textContent=[`state: ${current}`,`clip: ${viewer.animationName||'—'}`,`speed: ${Number(viewer.timeScale||1).toFixed(2)}×`,`animations: ${animations.length}`,...animations.map(name=>`  • ${name}`)].join('\n');}
 function setState(key,restart=true){current=key;const [label,clip]=clips[key];document.querySelectorAll('[data-state]').forEach(b=>b.classList.toggle('selected',b.dataset.state===key));$('#state-label').textContent=label;viewer.pause();viewer.animationName=clip;if(restart)viewer.currentTime=0;viewer.play({repetitions:Infinity});paused=false;$('#pause').textContent='Pause';readout();}
